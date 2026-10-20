@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="kk"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Оқытушыға арналған жауаптар</title><link rel="stylesheet" href="style.css"></head>
+<body class="admin"><main class="admin-main">
+<h1>Оқытушыға арналған жауаптар</h1>
+<p class="callout warn"><strong>Тек оқытушыға.</strong> Бұл бетке сайттағы ешбір батырма немесе сілтеме апармайды: тек мекенжай жолына жазу арқылы ашылады. Бұл файлды студенттерге таратпаңыз.</p>
+<h2>1. Қайталау тесті — дұрыс жауаптар</h2><ul><li><strong>Жиын (set) деген не?</strong><br>Дұрыс жауап: <b>Қайталанбайтын (бірегей) элементтер жиынтығы</b>. Жиын тек бірегей элементтерді сақтайды. Индекс бойынша қатынау жоқ, реті кепілдік берілмейді.</li><li><strong>Бос жиынды қалай дұрыс жасауға болады?</strong><br>Дұрыс жауап: <b>set()</b>. {} — бос сөздік (dict). Бос жиын тек set() арқылы жасалады.</li><li><strong>student = {'name': 'Asan', 'age': 20} жазбасында 'age' пен 20 қалай аталады?</strong><br>Дұрыс жауап: <b>'age' — кілт, 20 — мән</b>. Сөздікте жазба «кілт: мән» түрінде. Кілт арқылы мәнді табамыз. Кілттер бірегей болады.</li><li><strong>Сөздікте 'phone' кілті жоқ. student.get('phone') пен student['phone'] не береді?</strong><br>Дұрыс жауап: <b>get() — None (қате жоқ), [] — KeyError</b>. get() кілт жоқ болса None (немесе өзіңіз берген мән) қайтарады. Ал dict[key] — KeyError көтереді.</li></ul><h2>2. Практикалық тапсырмалар — шешімдер</h2><h3>1-тапсырма. Бірегей сандар</h3><p>Тізімдегі бірегей сандарды өсу ретімен шығарыңыз.</p><figure class="code-card"><figcaption><span class="code-title">Шешім</span></figcaption><pre class="code"><code>numbers = [4, 6, 4, 8, 6, 9]
+print(sorted(set(numbers)))</code></pre><div class="output"><h4>Нәтиже</h4><pre>[4, 6, 8, 9]</pre></div></figure><p>Жиын қайталануды жояды: {4, 6, 8, 9}. sorted() оны өсу ретімен тізімге айналдырады. Тексеру: 4 пен 6 тек бір реттен шығуы керек.</p><h3>2-тапсырма. Қиылысу және айырым</h3><p>A және B жиындары берілген. Олардың қиылысуын және A − B айырымын табыңыз (екеуін де sorted() арқылы шығарыңыз).</p><figure class="code-card"><figcaption><span class="code-title">Шешім</span></figcaption><pre class="code"><code>A = {2, 4, 6, 8}
+B = {4, 7, 8}
+print(sorted(A &amp; B))
+print(sorted(A - B))</code></pre><div class="output"><h4>Нәтиже</h4><pre>[4, 8]
+[2, 6]</pre></div></figure><p>Ортақ элементтер — 4 және 8. A-да бар, B-да жоқ элементтер — 2 және 6. Айырым ретке тәуелді: B − A басқа нәтиже береді (тек [7]).</p><h3>3-тапсырма. Элемент қосу және өшіру</h3><p>s жиынына 9 санын қосыңыз, 3 санын өшіріңіз, содан кейін жиында жоқ 100 санын discard() арқылы өшіріп көріңіз (қате шықпауы керек). Жиынды өсу ретімен және элемент санын шығарыңыз.</p><figure class="code-card"><figcaption><span class="code-title">Шешім</span></figcaption><pre class="code"><code>s = {1, 3, 5, 7}
+s.add(9)
+s.discard(3)
+s.discard(100)
+print(sorted(s))
+print(len(s))</code></pre><div class="output"><h4>Нәтиже</h4><pre>[1, 5, 7, 9]
+4</pre></div></figure><p>9 қосылды, 3 өшірілді, 100 жоқ болғандықтан discard() ештеңе өзгертпеді және қате шығармады. Қалған элементтер: 1, 5, 7, 9 (барлығы 4). remove(100) болса KeyError шығар еді.</p><h3>4-тапсырма. Екі топтың аттары</h3><p>Екі топтың студент аттары берілген. Екі топта да бар аттарды және тек біреуінде ғана бар аттарды өсу ретімен шығарыңыз.</p><figure class="code-card"><figcaption><span class="code-title">Шешім</span></figcaption><pre class="code"><code>group_a = {'Aru', 'Dina', 'Eldos', 'Asan'}
+group_b = {'Dina', 'Asan', 'Nurlan'}
+print(sorted(group_a &amp; group_b))
+print(sorted(group_a ^ group_b))</code></pre><div class="output"><h4>Нәтиже</h4><pre>['Asan', 'Dina']
+['Aru', 'Eldos', 'Nurlan']</pre></div></figure><p>Ортақ аттар — Asan және Dina. Тек бір топта бар аттар — Aru, Eldos (A тобында) және Nurlan (B тобында). Симметриялық айырым осы екі жағын да береді.</p><h3>5-тапсырма. Сөздікті өзгерту</h3><p>score мәнін 85-ке жаңартыңыз, dept кілтін қосыңыз (мәнін өзіңіз таңдаңыз, мысалы 'IT'), содан кейін name мен score мәндерін шығарыңыз.</p><figure class="code-card"><figcaption><span class="code-title">Шешім</span></figcaption><pre class="code"><code>student = {'name': 'Dina', 'score': 75}
+student['score'] = 85
+student['dept'] = 'IT'
+print(student['name'], student['score'])</code></pre><div class="output"><h4>Нәтиже</h4><pre>Dina 85</pre></div></figure><p>score кілті бұрыннан бар болғандықтан, мәні 75-тен 85-ке өзгереді. dept кілті жоқ болғандықтан, жаңа жазба болып қосылады. Егер dept мәні басқа болса да, шығатын нәтиже өзгермейді.</p><h3>6-тапсырма. get() және items()</h3><p>prices сөздігінен «нан» бағасын [] арқылы шығарыңыз; «шай» кілті жоқ, оның бағасын get() арқылы қате шығармай 0 деп шығарыңыз; содан кейін барлық тауар мен бағасын жолма-жол шығарыңыз.</p><figure class="code-card"><figcaption><span class="code-title">Шешім</span></figcaption><pre class="code"><code>prices = {'алма': 450, 'нан': 120, 'сүт': 300}
+print(prices['нан'])
+print(prices.get('шай', 0))
+for name, price in prices.items():
+    print(name, price)</code></pre><div class="output"><h4>Нәтиже</h4><pre>120
+0
+алма 450
+нан 120
+сүт 300</pre></div></figure><p>prices['шай'] KeyError берер еді, ал get('шай', 0) қате бермей 0 қайтарады. items() жұптарды енгізілген ретімен береді.</p><h3>7-тапсырма. zip() және update()</h3><p>fields және values тізімдерінен zip() арқылы сөздік жасаңыз. Содан кейін update() арқылы age мәнін 22-ге өзгертіп, group кілтін ('IS-31') қосыңыз және сөздікті шығарыңыз.</p><figure class="code-card"><figcaption><span class="code-title">Шешім</span></figcaption><pre class="code"><code>fields = ['name', 'age']
+values = ['Aru', 21]
+record = dict(zip(fields, values))
+record.update({'age': 22, 'group': 'IS-31'})
+print(record)</code></pre><div class="output"><h4>Нәтиже</h4><pre>{'name': 'Aru', 'age': 22, 'group': 'IS-31'}</pre></div></figure><p>Алдымен {'name': 'Aru', 'age': 21} шығады. update() age-ті 22-ге өзгертеді (кілт бар), group-ты соңына қосады (кілт жоқ). Сөздік енгізілген ретті сақтайды.</p><h3>8-тапсырма. Сөздіктер тізімі</h3><p>Студенттер тізімінен ұпайы 80-ден кем емес студенттердің аты мен ұпайын шығарыңыз, содан кейін олардың санын шығарыңыз.</p><figure class="code-card"><figcaption><span class="code-title">Шешім</span></figcaption><pre class="code"><code>students = [
+    {'name': 'Asan', 'score': 72},
+    {'name': 'Dina', 'score': 90},
+    {'name': 'Aru', 'score': 85},
+    {'name': 'Eldos', 'score': 60}
+]
+count = 0
+for item in students:
+    if item['score'] &gt;= 80:
+        print(item['name'], item['score'])
+        count += 1
+print('Жалпы:', count)</code></pre><div class="output"><h4>Нәтиже</h4><pre>Dina 90
+Aru 85
+Жалпы: 2</pre></div></figure><p>Шартты 90 және 85 қанағаттандырады (80 дәл тең болса да кірер еді, себебі &gt;=). Сондықтан Dina мен Aru шығады, саны — 2.</p><h3>Қорытынды сұрақтар</h3><ol><li>Қайталануды жою үшін: <code>set</code> (жиын).</li><li>Ат, жас, мамандық сияқты сипаттарды кілтпен сақтау үшін: <code>dict</code> (сөздік).</li></ol><h2>3. Зертханалық жұмыс — эталон шешімдер</h2><details><summary>Нұсқа 1</summary><h3>1-есеп. Жиын (№2)</h3><p><em>A={2;4;6;8;10} және B={3;6;9;12} жиындары берілген. Екі жиынның қиылысуын және бірігуін табыңыз.</em></p><figure class="code-card"><figcaption><span class="code-title">Шешім</span></figcaption><pre class="code"><code>A = {2, 4, 6, 8, 10}
+B = {3, 6, 9, 12}
+
+print('Қиылысуы:', sorted(A &amp; B))
+print('Бірігуі:', sorted(A | B))</code></pre><div class="output"><h4>Нәтиже</h4><pre>Қиылысуы: [6]
+Бірігуі: [2, 3, 4, 6, 8, 9, 10, 12]</pre></div></figure><h3>2-есеп. Сөздік (№10)</h3><p><em>Дәріханадағы дәрілер туралы келесі мәліметтер белгілі болсын: дәрілік препараттың аты, бағасы, саны, сақтау мерзімі. Дәріханадғы барлық дәрілердің қанша тұратынын және сақтау мерзімі 3 айдан артық препараттарды анықтау программасын құрыңыз.</em></p><p><b>Нақтылау:</b> Сөздік есебінде барлық дәрілердің жалпы құны: баға × сан қосындысы. Мерзімі 3 айдан артықтарды жеке шығарыңыз.</p><figure class="code-card"><figcaption><span class="code-title">Шешім</span></figcaption><pre class="code"><code>drugs = [
+    {"атауы": "Парацетамол", "бағасы": 350, "саны": 5, "мерзімі": 8},
+    {"атауы": "Витамин C", "бағасы": 900, "саны": 2, "мерзімі": 2},
+    {"атауы": "Сироп", "бағасы": 1200, "саны": 3, "мерзімі": 6},
+    {"атауы": "Спрей", "бағасы": 1500, "саны": 1, "мерзімі": 3}
+]
+
+total = sum(d['бағасы'] * d['саны'] for d in drugs)
+print('Жалпы құны:', total)
+for d in drugs:
+    if d['мерзімі'] &gt; 3:
+        print(d['атауы'], d['мерзімі'], 'ай')</code></pre><div class="output"><h4>Нәтиже</h4><pre>Жалпы құны: 8650
+Парацетамол 8 ай
+Сироп 6 ай</pre></div></figure><h3>3-есеп. Жиын + сөздік</h3><p><em>Студенттердің қалалары сөздіктер тізімі түрінде берілген. 1) Қалалардан қайталанбайтын жиын құрыңыз. 2) Оның visited жиынымен қиылысуын табыңыз. 3) Нәтижені sorted() арқылы және элемент санын шығарыңыз.</em></p><figure class="code-card"><figcaption><span class="code-title">Шешім</span></figcaption><pre class="code"><code>students = [
+    {"аты": "Аян", "қала": "Ақтөбе"},
+    {"аты": "Дина", "қала": "Орал"},
+    {"аты": "Ерлан", "қала": "Ақтөбе"},
+    {"аты": "Аружан", "қала": "Атырау"},
+    {"аты": "Саят", "қала": "Орал"}
+]
+visited = {"Ақтөбе", "Астана", "Атырау"}
+
+cities = {s['қала'] for s in students}
+result = cities &amp; visited
+print(sorted(result))
+print(len(result))</code></pre><div class="output"><h4>Нәтиже</h4><pre>['Атырау', 'Ақтөбе']
+2</pre></div></figure></details><details><summary>Нұсқа 2</summary><h3>1-есеп. Жиын (№7)</h3><p><em>A жиыны берілген. Жиынның 5ке еселі сандарын жойыңыз.</em></p><figure class="code-card"><figcaption><span class="code-title">Шешім</span></figcaption><pre class="code"><code>A = {5, 7, 10, 11, 15, 20, 24}
+
+for x in list(A):
+    if x % 5 == 0:
+        A.discard(x)
+print(sorted(A))</code></pre><div class="output"><h4>Нәтиже</h4><pre>[7, 11, 24]</pre></div></figure><h3>2-есеп. Сөздік (№9)</h3><p><em>Тұрғындар санағының нәтижелері берілген болсын. 1990 ж. кейін туылған тұрғындардың фамилиясын, атын және жалпы санын анықтайтын программа құрыңыз.</em></p><p><b>Нақтылау:</b> 1990 жылдан кейін деген шарт: жылы &gt; 1990 (1990 жылдың өзі кірмейді).</p><figure class="code-card"><figcaption><span class="code-title">Шешім</span></figcaption><pre class="code"><code>people = [
+    {"тегі": "Әлиев", "аты": "Данияр", "жылы": 1994},
+    {"тегі": "Ким", "аты": "Диана", "жылы": 1988},
+    {"тегі": "Қабылбек", "аты": "Ару", "жылы": 2003},
+    {"тегі": "Омар", "аты": "Елдос", "жылы": 1990}
+]
+
+count = 0
+for p in people:
+    if p['жылы'] &gt; 1990:
+        print(p['тегі'], p['аты'])
+        count += 1
+print('Жалпы саны:', count)</code></pre><div class="output"><h4>Нәтиже</h4><pre>Әлиев Данияр
+Қабылбек Ару
+Жалпы саны: 2</pre></div></figure><h3>3-есеп. Жиын + сөздік</h3><p><em>Кітапхана кітаптары сөздіктер тізімі түрінде берілген. 1) Жанрлардан қайталанбайтын жиын құрыңыз. 2) Тізімде бар, бірақ known жиынында жоқ жанрларды табыңыз (айырым). 3) Нәтижені sorted() арқылы және элемент санын шығарыңыз.</em></p><figure class="code-card"><figcaption><span class="code-title">Шешім</span></figcaption><pre class="code"><code>books = [
+    {"атауы": "Абай жолы", "жанры": "роман"},
+    {"атауы": "Python", "жанры": "ғылыми"},
+    {"атауы": "Алгоритм", "жанры": "ғылыми"},
+    {"атауы": "Қобыланды", "жанры": "эпос"},
+    {"атауы": "Ертегілер", "жанры": "балалар"}
+]
+known = {"роман", "ғылыми", "детектив"}
+
+genres = {b['жанры'] for b in books}
+result = genres - known
+print(sorted(result))
+print(len(result))</code></pre><div class="output"><h4>Нәтиже</h4><pre>['балалар', 'эпос']
+2</pre></div></figure></details><details><summary>Нұсқа 3</summary><h3>1-есеп. Жиын (№8)</h3><p><em>A={2; 6;8;9} және B={3;6;9 } жиындары берілген. Екі жиынның бірігуін және айырымын табыңыз.</em></p><figure class="code-card"><figcaption><span class="code-title">Шешім</span></figcaption><pre class="code"><code>A = {2, 6, 8, 9}
+B = {3, 6, 9}
+
+print('Бірігуі:', sorted(A | B))
+print('Айырымы A-B:', sorted(A - B))</code></pre><div class="output"><h4>Нәтиже</h4><pre>Бірігуі: [2, 3, 6, 8, 9]
+Айырымы A-B: [2, 8]</pre></div></figure><h3>2-есеп. Сөздік (№6)</h3><p><em>Кітаптардың аты, авторы, шыққан жылы, бағасы және тиражы бойынша сұрыпталған кітаптар тізімін шығарыңыз.</em></p><p><b>Нақтылау:</b> Түпнұсқада сұрыптау критерийінің реті нақтыланбаған. Біздің тексеруде екі бөлек сұрыптау жасаңыз: шыққан жылы және бағасы бойынша өсу ретімен.</p><figure class="code-card"><figcaption><span class="code-title">Шешім</span></figcaption><pre class="code"><code>books = [
+    {"атауы": "Python негіздері", "авторы": "А. Сәрсен", "жылы": 2020, "бағасы": 3800, "тиражы": 700},
+    {"атауы": "Алгоритмдер", "авторы": "Н. Жан", "жылы": 2017, "бағасы": 4200, "тиражы": 350},
+    {"атауы": "Деректер", "авторы": "М. Аман", "жылы": 2023, "бағасы": 3000, "тиражы": 500},
+    {"атауы": "Программалау", "авторы": "Е. Қуат", "жылы": 2019, "бағасы": 5500, "тиражы": 450}
+]
+
+for b in sorted(books, key=lambda x: x['жылы']):
+    print(b['атауы'], b['авторы'], b['жылы'], b['бағасы'], b['тиражы'])
+print('---')
+for b in sorted(books, key=lambda x: x['бағасы']):
+    print(b['атауы'], b['авторы'], b['жылы'], b['бағасы'], b['тиражы'])</code></pre><div class="output"><h4>Нәтиже</h4><pre>Алгоритмдер Н. Жан 2017 4200 350
+Программалау Е. Қуат 2019 5500 450
+Python негіздері А. Сәрсен 2020 3800 700
+Деректер М. Аман 2023 3000 500
+---
+Деректер М. Аман 2023 3000 500
+Python негіздері А. Сәрсен 2020 3800 700
+Алгоритмдер Н. Жан 2017 4200 350
+Программалау Е. Қуат 2019 5500 450</pre></div></figure><h3>3-есеп. Жиын + сөздік</h3><p><em>Дүкеннің сатылымдары сөздіктер тізімі түрінде берілген. 1) Сатылған тауарлардан қайталанбайтын жиын құрыңыз. 2) Оның stock жиынымен симметриялық айырымын табыңыз. 3) Нәтижені sorted() арқылы және элемент санын шығарыңыз.</em></p><figure class="code-card"><figcaption><span class="code-title">Шешім</span></figcaption><pre class="code"><code>sales = [
+    {"тауар": "нан", "саны": 3},
+    {"тауар": "сүт", "саны": 2},
+    {"тауар": "кәмпит", "саны": 5},
+    {"тауар": "нан", "саны": 1},
+    {"тауар": "шай", "саны": 2}
+]
+stock = {"нан", "сүт", "май", "шай"}
+
+sold = {s['тауар'] for s in sales}
+result = sold ^ stock
+print(sorted(result))
+print(len(result))</code></pre><div class="output"><h4>Нәтиже</h4><pre>['кәмпит', 'май']
+2</pre></div></figure></details><details><summary>Нұсқа 4</summary><h3>1-есеп. Жиын (№10)</h3><p><em>А жиынындағы ең кіші элементі В жиынына орналастыру;</em></p><p><b>Нақтылау:</b> «В жиынына орналастыру» тіркесі осы сабақта B жиынына элемент қосу деп нақтыланды; A жиынынан жою талап етілмейді.</p><figure class="code-card"><figcaption><span class="code-title">Шешім</span></figcaption><pre class="code"><code>A = {4, 7, 10, 12}
+B = {1, 9}
+
+B.add(min(A))
+print(sorted(B))</code></pre><div class="output"><h4>Нәтиже</h4><pre>[1, 4, 9]</pre></div></figure><h3>2-есеп. Сөздік (№5)</h3><p><em>«Телефондық анықтаманы» модельдейтін программа құру, әйел адамдардың телефон номірі мен мекен жайын шығару.</em></p><figure class="code-card"><figcaption><span class="code-title">Шешім</span></figcaption><pre class="code"><code>contacts = [
+    {"аты": "Айгүл", "жынысы": "әйел", "телефон": "111-22-33", "мекенжай": "Ақтөбе, 1-үй"},
+    {"аты": "Нұрлан", "жынысы": "ер", "телефон": "222-33-44", "мекенжай": "Ақтөбе, 2-үй"},
+    {"аты": "Дина", "жынысы": "әйел", "телефон": "333-44-55", "мекенжай": "Ақтөбе, 3-үй"},
+    {"аты": "Аян", "жынысы": "ер", "телефон": "444-55-66", "мекенжай": "Ақтөбе, 4-үй"}
+]
+
+for c in contacts:
+    if c['жынысы'] == 'әйел':
+        print(c['аты'], c['телефон'], c['мекенжай'])</code></pre><div class="output"><h4>Нәтиже</h4><pre>Айгүл 111-22-33 Ақтөбе, 1-үй
+Дина 333-44-55 Ақтөбе, 3-үй</pre></div></figure><h3>3-есеп. Жиын + сөздік</h3><p><em>Кафедра оқытушыларының пәндері сөздіктер тізімі түрінде берілген. 1) Пәндерден қайталанбайтын жиын құрыңыз. 2) Оның other жиынымен бірігуін табыңыз. 3) Нәтижені sorted() арқылы және элемент санын шығарыңыз.</em></p><figure class="code-card"><figcaption><span class="code-title">Шешім</span></figcaption><pre class="code"><code>teachers = [
+    {"оқытушы": "Асқар", "пән": "Python"},
+    {"оқытушы": "Мира", "пән": "Алгоритмдер"},
+    {"оқытушы": "Бақыт", "пән": "Python"},
+    {"оқытушы": "Серік", "пән": "Желілер"},
+    {"оқытушы": "Гүлнар", "пән": "SQL"}
+]
+other = {"Java", "SQL"}
+
+subjects = {t['пән'] for t in teachers}
+result = subjects | other
+print(sorted(result))
+print(len(result))</code></pre><div class="output"><h4>Нәтиже</h4><pre>['Java', 'Python', 'SQL', 'Алгоритмдер', 'Желілер']
+5</pre></div></figure></details><details><summary>Нұсқа 5</summary><h3>1-есеп. Жиын (№9)</h3><p><em>А жиынынан К элементке еселенген барлық сандарды жою;</em></p><p><b>Нақтылау:</b> K осы мысалда 3; негізгі талап: A ішінен K-ге қалдықсыз бөлінетіндерді жою.</p><figure class="code-card"><figcaption><span class="code-title">Шешім</span></figcaption><pre class="code"><code>A = {3, 5, 6, 9, 11, 14}
+K = 3
+
+for x in list(A):
+    if x % K == 0:
+        A.discard(x)
+print(sorted(A))</code></pre><div class="output"><h4>Нәтиже</h4><pre>[5, 11, 14]</pre></div></figure><h3>2-есеп. Сөздік (№7)</h3><p><em>Теміржол кассасында төмендегідей мәлімет бар: поездің номірі, баратын жері, билеттің бар не жоғы. Бос орындар саны 100-ден асатын поездардың номірін, баратын жерін экранға шығарыңыз.</em></p><p><b>Нақтылау:</b> Пойызда бос орын &gt; 100 шарты қолданылады.</p><figure class="code-card"><figcaption><span class="code-title">Шешім</span></figcaption><pre class="code"><code>trains = [
+    {"нөмірі": "011", "бағыт": "Алматы", "билет_бар": True, "бос_орын": 80},
+    {"нөмірі": "022", "бағыт": "Астана", "билет_бар": True, "бос_орын": 132},
+    {"нөмірі": "033", "бағыт": "Атырау", "билет_бар": True, "бос_орын": 101},
+    {"нөмірі": "044", "бағыт": "Орал", "билет_бар": False, "бос_орын": 0}
+]
+
+for t in trains:
+    if t['бос_орын'] &gt; 100:
+        print(t['нөмірі'], t['бағыт'])</code></pre><div class="output"><h4>Нәтиже</h4><pre>022 Астана
+033 Атырау</pre></div></figure><h3>3-есеп. Жиын + сөздік</h3><p><em>Оқушылардың спорт секциялары сөздіктер тізімі түрінде берілген. 1) Секциялардан қайталанбайтын жиын құрыңыз. 2) Оның open_sections жиынымен қиылысуын табыңыз. 3) Нәтижені sorted() арқылы және элемент санын шығарыңыз.</em></p><figure class="code-card"><figcaption><span class="code-title">Шешім</span></figcaption><pre class="code"><code>pupils = [
+    {"аты": "Алмас", "секция": "футбол"},
+    {"аты": "Томирис", "секция": "теннис"},
+    {"аты": "Рауан", "секция": "шахмат"},
+    {"аты": "Дәулет", "секция": "футбол"},
+    {"аты": "Інжу", "секция": "би"}
+]
+open_sections = {"футбол", "шахмат", "жүзу"}
+
+sections = {p['секция'] for p in pupils}
+result = sections &amp; open_sections
+print(sorted(result))
+print(len(result))</code></pre><div class="output"><h4>Нәтиже</h4><pre>['футбол', 'шахмат']
+2</pre></div></figure></details><details><summary>Нұсқа 6</summary><h3>1-есеп. Жиын (№12)</h3><p><em>А жиынындағы ең үлкен элементі В жиынына орналастыру;</em></p><p><b>Нақтылау:</b> «В жиынына орналастыру» осы сабақта B жиынына қосу деп нақтыланды; A өзгермейді.</p><figure class="code-card"><figcaption><span class="code-title">Шешім</span></figcaption><pre class="code"><code>A = {3, 8, 11, 16}
+B = {1, 4}
+
+B.add(max(A))
+print(sorted(B))</code></pre><div class="output"><h4>Нәтиже</h4><pre>[1, 4, 16]</pre></div></figure><h3>2-есеп. Сөздік (№4)</h3><p><em>Мекеме қызметкерлері туралы мәліметтер сөздік түрінде анықталған. Ер адамдардың мамандығы мен жасын көрсетіп, экранға тізім шығарыңыз.</em></p><figure class="code-card"><figcaption><span class="code-title">Шешім</span></figcaption><pre class="code"><code>employees = [
+    {"аты": "Ержан", "жынысы": "ер", "мамандығы": "программист", "жасы": 27},
+    {"аты": "Айгүл", "жынысы": "әйел", "мамандығы": "дизайнер", "жасы": 26},
+    {"аты": "Бекзат", "жынысы": "ер", "мамандығы": "инженер", "жасы": 31},
+    {"аты": "Дана", "жынысы": "әйел", "мамандығы": "талдаушы", "жасы": 24}
+]
+
+for e in employees:
+    if e['жынысы'] == 'ер':
+        print(e['аты'], e['мамандығы'], e['жасы'])</code></pre><div class="output"><h4>Нәтиже</h4><pre>Ержан программист 27
+Бекзат инженер 31</pre></div></figure><h3>3-есеп. Жиын + сөздік</h3><p><em>Қонақүй бөлмелері сөздіктер тізімі түрінде берілген. 1) Бөлмелер орналасқан қабаттардан қайталанбайтын жиын құрыңыз. 2) Одан жөндеудегі repair қабаттарын шығарып тастаңыз (айырым). 3) Нәтижені sorted() арқылы және элемент санын шығарыңыз.</em></p><figure class="code-card"><figcaption><span class="code-title">Шешім</span></figcaption><pre class="code"><code>rooms = [
+    {"нөмірі": 101, "қабат": 1},
+    {"нөмірі": 102, "қабат": 1},
+    {"нөмірі": 201, "қабат": 2},
+    {"нөмірі": 301, "қабат": 3},
+    {"нөмірі": 401, "қабат": 4}
+]
+repair = {2, 4}
+
+floors = {r['қабат'] for r in rooms}
+result = floors - repair
+print(sorted(result))
+print(len(result))</code></pre><div class="output"><h4>Нәтиже</h4><pre>[1, 3]
+2</pre></div></figure></details><details><summary>Нұсқа 7</summary><h3>1-есеп. Жиын (№11)</h3><p><em>А және В аралықтағы бүтін сандардан жиын құру</em></p><p><b>Нақтылау:</b> А және В аралығы осы тексеруде екі шеткі мәнді қоса қамтиды: [4, 11].</p><figure class="code-card"><figcaption><span class="code-title">Шешім</span></figcaption><pre class="code"><code>A = 4
+B = 11
+
+S = set(range(A, B + 1))
+print(sorted(S))</code></pre><div class="output"><h4>Нәтиже</h4><pre>[4, 5, 6, 7, 8, 9, 10, 11]</pre></div></figure><h3>2-есеп. Сөздік (№8)</h3><p><em>Өзіңіз оқитын топтың тізімін алфавит бойынша реттеп туған жылын көрсетіп экранға шығарыңыз.</em></p><p><b>Нақтылау:</b> Топ аты-жөндері шартты мысал; өз тобыңыздың тізімі болса, алмастыра аласыз.</p><figure class="code-card"><figcaption><span class="code-title">Шешім</span></figcaption><pre class="code"><code>students = [
+    {"аты": "Мақсат", "туған_жылы": 2005},
+    {"аты": "Бекзат", "туған_жылы": 2004},
+    {"аты": "Айсұлтан", "туған_жылы": 2005},
+    {"аты": "Данияр", "туған_жылы": 2006}
+]
+
+for s in sorted(students, key=lambda x: x['аты']):
+    print(s['аты'], s['туған_жылы'])</code></pre><div class="output"><h4>Нәтиже</h4><pre>Айсұлтан 2005
+Бекзат 2004
+Данияр 2006
+Мақсат 2005</pre></div></figure><h3>3-есеп. Жиын + сөздік</h3><p><em>Фирма қызметкерлерінің мамандықтары сөздіктер тізімі түрінде берілген. 1) Мамандықтардан қайталанбайтын жиын құрыңыз. 2) Оның required жиынымен симметриялық айырымын табыңыз. 3) Нәтижені sorted() арқылы және элемент санын шығарыңыз.</em></p><figure class="code-card"><figcaption><span class="code-title">Шешім</span></figcaption><pre class="code"><code>workers = [
+    {"аты": "Ержан", "мамандығы": "программист"},
+    {"аты": "Айгүл", "мамандығы": "дизайнер"},
+    {"аты": "Бекзат", "мамандығы": "программист"},
+    {"аты": "Дана", "мамандығы": "аналитик"},
+    {"аты": "Нұрлан", "мамандығы": "менеджер"}
+]
+required = {"программист", "дизайнер", "тестілеуші"}
+
+jobs = {w['мамандығы'] for w in workers}
+result = jobs ^ required
+print(sorted(result))
+print(len(result))</code></pre><div class="output"><h4>Нәтиже</h4><pre>['аналитик', 'менеджер', 'тестілеуші']
+3</pre></div></figure></details><details><summary>Нұсқа 8</summary><h3>1-есеп. Жиын (№6)</h3><p><em>A жиыны берілген. Жиынның 3 ке еселі сандарын экранға шығарыңыз.</em></p><p><b>Нақтылау:</b> Жиын элементтерін оқуға ыңғайлы шығару үшін sorted() қолданыңыз.</p><figure class="code-card"><figcaption><span class="code-title">Шешім</span></figcaption><pre class="code"><code>A = {3, 4, 6, 8, 9, 12, 14}
+
+for x in sorted(A):
+    if x % 3 == 0:
+        print(x)</code></pre><div class="output"><h4>Нәтиже</h4><pre>3
+6
+9
+12</pre></div></figure><h3>2-есеп. Сөздік (№11)</h3><p><em>Фирма қызметкерлері туралы мәлімет берілген. Қызметкерлердің фамилиясын және атын, сонымен қатар әйел адам болса көзінің түсін, ер адам болса темекі шегетін, шекпейтіндігін көрсететін тізімді экранға шығарыңыз.</em></p><p><b>Нақтылау:</b> Сөздік есебінде жынысына қарай тиісті өрісті ғана шығарыңыз.</p><figure class="code-card"><figcaption><span class="code-title">Шешім</span></figcaption><pre class="code"><code>staff = [
+    {"тегі": "Қасымов", "аты": "Айдар", "жынысы": "ер", "темекі_шегеді": False},
+    {"тегі": "Омарова", "аты": "Дина", "жынысы": "әйел", "көз_түсі": "қоңыр"},
+    {"тегі": "Беков", "аты": "Самат", "жынысы": "ер", "темекі_шегеді": True},
+    {"тегі": "Әлиева", "аты": "Айжан", "жынысы": "әйел", "көз_түсі": "көк"}
+]
+
+for w in staff:
+    if w['жынысы'] == 'әйел':
+        print(w['тегі'], w['аты'], w['көз_түсі'])
+    else:
+        print(w['тегі'], w['аты'], 'шегеді' if w['темекі_шегеді'] else 'шекпейді')</code></pre><div class="output"><h4>Нәтиже</h4><pre>Қасымов Айдар шекпейді
+Омарова Дина қоңыр
+Беков Самат шегеді
+Әлиева Айжан көк</pre></div></figure><h3>3-есеп. Жиын + сөздік</h3><p><em>Курсқа жазылғандар сөздіктер тізімі түрінде берілген. 1) Курстардан қайталанбайтын жиын құрыңыз. 2) Ұсынылатын offered жиынында бар, бірақ ешкім жазылмаған курстарды табыңыз (айырым). 3) Нәтижені sorted() арқылы және элемент санын шығарыңыз.</em></p><figure class="code-card"><figcaption><span class="code-title">Шешім</span></figcaption><pre class="code"><code>enrollments = [
+    {"студент": "Аян", "курс": "Python"},
+    {"студент": "Дина", "курс": "SQL"},
+    {"студент": "Ерлан", "курс": "Python"},
+    {"студент": "Аружан", "курс": "Web"}
+]
+offered = {"Python", "Java", "Web", "C++"}
+
+taken = {e['курс'] for e in enrollments}
+result = offered - taken
+print(sorted(result))
+print(len(result))</code></pre><div class="output"><h4>Нәтиже</h4><pre>['C++', 'Java']
+2</pre></div></figure></details>
+</main></body></html>

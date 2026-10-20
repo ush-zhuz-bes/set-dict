@@ -1,0 +1,726 @@
+<!DOCTYPE html>
+<html lang="kk">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Жиындар мен сөздіктер — Python-да қосымшалар құру</title>
+<meta name="description" content="Python-да қосымшалар құру пәні: «Жиындар мен сөздіктер» тақырыбына арналған практикалық және зертханалық сабақ материалы.">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<a class="skip" href="#content">Мазмұнға өту</a>
+<header class="site-header">
+  <p class="uni">Қ. Жұбанов атындағы Ақтөбе өңірлік университеті</p>
+  <h1>Жиындар мен сөздіктер</h1>
+  <p class="course">Пән: Python-да қосымшалар құру · практикалық және зертханалық сабақ</p>
+  <p class="meta">6B06103 — Есептеу техникасы және программалық қамтамасыз ету · 3-курс, 5-семестр, 7-апта · 21.10.2026 · Студент саны: 8 · Топ: <span class="fill" data-cfg="group">________</span> · Кабинет: <span class="fill" data-cfg="room">______</span></p>
+  <p class="meta">Оқытушы: Практикант Елеуберген Ж.А. · Практика жетекшісі: Байбактина А.Т.</p>
+</header>
+<div class="tabbar noprint"><div class="tabs" role="tablist" aria-label="Сабақ түрі">
+  <button type="button" role="tab" id="tab-practice" data-mode="practice" aria-controls="mode-practice" aria-selected="true">Практикалық сабақ <small><span data-cfg="practiceMinutes">50</span> мин</small></button>
+  <button type="button" role="tab" id="tab-lab" data-mode="lab" aria-controls="mode-lab" aria-selected="false" tabindex="-1">Зертханалық сабақ <small><span data-cfg="labMinutes">50</span> мин</small></button>
+</div></div>
+<main id="content" class="layout">
+  <div class="mode" id="mode-practice" role="tabpanel" aria-labelledby="tab-practice">
+    <nav class="side noprint" aria-label="Практикалық сабақ бөлімдері"><button type="button" class="navbtn" data-section="s1"><span class="n">1</span><span class="t">Қайталау</span><span class="m">0–5 мин</span></button><button type="button" class="navbtn" data-section="s2"><span class="n">2</span><span class="t">Жиындар</span><span class="m">5–10 мин</span></button><button type="button" class="navbtn" data-section="s3"><span class="n">3</span><span class="t">Сөздіктер</span><span class="m">10–15 мин</span></button><button type="button" class="navbtn" data-section="s4"><span class="n">4</span><span class="t">Практикалық тапсырмалар</span><span class="m">15–50 мин</span></button></nav>
+    <div class="main"><section class="section" id="s1" aria-labelledby="h-s1">
+  <h2 id="h-s1"><span class="num">1</span>Қайталау <span class="time">0–5 минут</span></h2>
+  <p class="lead">Қысқа сұрақтарға жауап беріңіз де, «Тексеру» батырмасын басыңыз. Дұрыс жауап тек тексергеннен кейін көрсетіледі. Теория бөлімінің барлығы — 15 минут, қалған 35 минут практикаға арналған.</p>
+  <div class="quiz"><fieldset class="q" data-correct="b">
+  <legend>Жиын (set) деген не?</legend>
+  <div class="opts"><label class="opt" data-key="a"><input type="radio" name="q1" value="a"><span>Реттелген, қайталануы мүмкін элементтер тізбегі</span></label><label class="opt" data-key="b"><input type="radio" name="q1" value="b"><span>Қайталанбайтын (бірегей) элементтер жиынтығы</span></label><label class="opt" data-key="c"><input type="radio" name="q1" value="c"><span>Кілт–мән жұптарынан тұратын құрылым</span></label><label class="opt" data-key="d"><input type="radio" name="q1" value="d"><span>Өзгермейтін мәтін</span></label></div>
+  <div class="q-actions"><button type="button" class="btn check">Тексеру</button></div>
+  <div class="q-result" hidden aria-live="polite"><p class="q-status"></p>
+    <p><strong>Дұрыс жауап:</strong> Қайталанбайтын (бірегей) элементтер жиынтығы</p><p>Жиын тек бірегей элементтерді сақтайды. Индекс бойынша қатынау жоқ, реті кепілдік берілмейді.</p></div>
+</fieldset>
+<fieldset class="q" data-correct="a">
+  <legend>Бос жиынды қалай дұрыс жасауға болады?</legend>
+  <div class="opts"><label class="opt" data-key="a"><input type="radio" name="q3" value="a"><span>set()</span></label><label class="opt" data-key="b"><input type="radio" name="q3" value="b"><span>{}</span></label><label class="opt" data-key="c"><input type="radio" name="q3" value="c"><span>[]</span></label><label class="opt" data-key="d"><input type="radio" name="q3" value="d"><span>()</span></label></div>
+  <div class="q-actions"><button type="button" class="btn check">Тексеру</button></div>
+  <div class="q-result" hidden aria-live="polite"><p class="q-status"></p>
+    <p><strong>Дұрыс жауап:</strong> set()</p><p>{} — бос сөздік (dict). Бос жиын тек set() арқылы жасалады.</p></div>
+</fieldset>
+<fieldset class="q" data-correct="c">
+  <legend>student = {'name': 'Asan', 'age': 20} жазбасында 'age' пен 20 қалай аталады?</legend>
+  <div class="opts"><label class="opt" data-key="a"><input type="radio" name="q4" value="a"><span>'age' — мән, 20 — кілт</span></label><label class="opt" data-key="b"><input type="radio" name="q4" value="b"><span>Екеуі де кілт</span></label><label class="opt" data-key="c"><input type="radio" name="q4" value="c"><span>'age' — кілт, 20 — мән</span></label><label class="opt" data-key="d"><input type="radio" name="q4" value="d"><span>Екеуі де индекс</span></label></div>
+  <div class="q-actions"><button type="button" class="btn check">Тексеру</button></div>
+  <div class="q-result" hidden aria-live="polite"><p class="q-status"></p>
+    <p><strong>Дұрыс жауап:</strong> 'age' — кілт, 20 — мән</p><p>Сөздікте жазба «кілт: мән» түрінде. Кілт арқылы мәнді табамыз. Кілттер бірегей болады.</p></div>
+</fieldset>
+<fieldset class="q" data-correct="b">
+  <legend>Сөздікте 'phone' кілті жоқ. student.get('phone') пен student['phone'] не береді?</legend>
+  <div class="opts"><label class="opt" data-key="a"><input type="radio" name="q5" value="a"><span>Екеуі де KeyError береді</span></label><label class="opt" data-key="b"><input type="radio" name="q5" value="b"><span>get() — None (қате жоқ), [] — KeyError</span></label><label class="opt" data-key="c"><input type="radio" name="q5" value="c"><span>get() — KeyError, [] — None</span></label><label class="opt" data-key="d"><input type="radio" name="q5" value="d"><span>Екеуі де None береді</span></label></div>
+  <div class="q-actions"><button type="button" class="btn check">Тексеру</button></div>
+  <div class="q-result" hidden aria-live="polite"><p class="q-status"></p>
+    <p><strong>Дұрыс жауап:</strong> get() — None (қате жоқ), [] — KeyError</p><p>get() кілт жоқ болса None (немесе өзіңіз берген мән) қайтарады. Ал dict[key] — KeyError көтереді.</p></div>
+</fieldset></div>
+  <p><button type="button" class="btn btn-ghost" id="quiz-reset">Тестті қайта бастау</button></p>
+  <h3>Негізгі код</h3>
+  <p>Кодты оқып, нәтижесін алдымен болжаңыз, содан кейін өз компьютеріңізде орындап салыстырыңыз.</p>
+  <figure class="code-card" id="ex-review">
+  <figcaption><span class="code-title">Қайталау: set() және {}</span>
+    <button type="button" class="btn copy" data-copy="ex-review-code">Көшіріп алу</button></figcaption>
+  <pre class="code" id="ex-review-code" tabindex="0"><code>values = [1, 2, 3, 1, 2]
+numbers = set(values)
+print(sorted(numbers))
+empty_set = set()
+empty_dict = {}
+print(type(empty_set), type(empty_dict))</code></pre>
+  <div class="explain"><h4>Әр жолға түсіндірме</h4>
+    <table><thead><tr><th>№</th><th>Код</th><th>Түсіндірме</th></tr></thead><tbody><tr><td class="ln">1</td><td><code>values = [1, 2, 3, 1, 2]</code></td><td>Тізім жасаймыз. 1 және 2 екі реттен кездеседі.</td></tr><tr><td class="ln">2</td><td><code>numbers = set(values)</code></td><td>Тізімнен жиын жасаймыз. Қайталанған элементтер бір рет қана қалады: {1, 2, 3}.</td></tr><tr><td class="ln">3</td><td><code>print(sorted(numbers))</code></td><td>Жиын ретті кепілдемейді, сондықтан sorted() арқылы өсу ретімен тізім аламыз: [1, 2, 3].</td></tr><tr><td class="ln">4</td><td><code>empty_set = set()</code></td><td>Бос жиын тек set() арқылы жасалады.</td></tr><tr><td class="ln">5</td><td><code>empty_dict = {}</code></td><td>Бос {} жиын емес, бос сөздік жасайды.</td></tr><tr><td class="ln">6</td><td><code>print(type(empty_set), type(empty_dict))</code></td><td>type() объект түрін көрсетеді: бірінші set, екінші dict.</td></tr></tbody></table></div>
+  <div class="output"><h4>Күтілетін нәтиже</h4><pre>[1, 2, 3]
+&lt;class 'set'&gt; &lt;class 'dict'&gt;</pre></div>
+</figure>
+  <div class="callout"><strong>Есте сақтаңыз:</strong> <code>{}</code> — бос <em>сөздік</em>; бос <em>жиын</em> тек <code>set()</code> арқылы жасалады.</div>
+  <div class="pager"><span></span><button type="button" class="btn" data-goto="s2">Келесі: Жиындар →</button></div>
+</section><section class="section is-hidden" id="s2" aria-labelledby="h-s2">
+  <h2 id="h-s2"><span class="num">2</span>Жиындар <span class="time">5–10 минут</span></h2>
+  <p class="lead">Жиын (<code>set</code>) — бірегей, қайталанбайтын элементтер жиынтығы. Индексі жоқ, элементтерінің реті кепілдік берілмейді.</p>
+  <div class="grid2">
+    <div class="card"><h3>Құру және тексеру</h3>
+      <table class="ref"><tbody>
+        <tr><td><code>set()</code></td><td>бос жиын; <code>set(тізім)</code> — тізімнен жиын</td></tr>
+        <tr><td><code>{1, 2, 3}</code></td><td>элементтерді тікелей жазу</td></tr>
+        <tr><td><code>len(s)</code></td><td>элемент саны</td></tr>
+        <tr><td><code>x in s</code></td><td>x жиында бар ма? (<code>True</code>/<code>False</code>)</td></tr>
+      </tbody></table>
+      <p class="small">Жиын элементі өзгермейтін (hashable) болуы керек: сан, мәтін, кортеж болады; тізім, жиын, сөздік болмайды.</p></div>
+    <div class="card"><h3>Өзгерту</h3>
+      <table class="ref"><tbody>
+        <tr><td><code>s.add(x)</code></td><td>элемент қосады</td></tr>
+        <tr><td><code>s.remove(x)</code></td><td>өшіреді; x жоқ болса — <code>KeyError</code></td></tr>
+        <tr><td><code>s.discard(x)</code></td><td>өшіреді; x жоқ болса да қате жоқ</td></tr>
+      </tbody></table></div>
+  </div>
+  <div class="card"><h3>Жиын амалдары</h3>
+    <table class="ref"><thead><tr><th>Амал</th><th>Оператор</th><th>Әдіс</th><th>Мағынасы</th></tr></thead><tbody>
+      <tr><td>Бірігу</td><td><code>a | b</code></td><td><code>a.union(b)</code></td><td>екеуінің барлық элементі</td></tr>
+      <tr><td>Қиылысу</td><td><code>a &amp; b</code></td><td><code>a.intersection(b)</code></td><td>екеуінде де бар элементтер</td></tr>
+      <tr><td>Айырым</td><td><code>a - b</code></td><td><code>a.difference(b)</code></td><td>a-да бар, b-да жоқ</td></tr>
+      <tr><td>Симметриялық айырым</td><td><code>a ^ b</code></td><td><code>a.symmetric_difference(b)</code></td><td>тек біреуінде бар</td></tr>
+    </tbody></table></div>
+  <div class="callout warn"><strong>Реті тұрақты емес.</strong> Жиынды <code>print()</code> жасағанда элементтердің реті әртүрлі болуы мүмкін. Сондықтан мысалдарда нәтижені салыстыру үшін <code>sorted()</code> қолданылады (ол тізім қайтарады).</div>
+  <figure class="code-card" id="ex-setops">
+  <figcaption><span class="code-title">Жиындармен амалдар</span>
+    <button type="button" class="btn copy" data-copy="ex-setops-code">Көшіріп алу</button></figcaption>
+  <pre class="code" id="ex-setops-code" tabindex="0"><code>a = {1, 2, 3, 4, 5}
+b = {4, 5, 6, 7, 8}
+print('Бірігуі:', sorted(a | b))
+print('Қиылысуы:', sorted(a &amp; b))
+print('Айырымы:', sorted(a - b))
+print('Симметриялық айырым:', sorted(a ^ b))</code></pre>
+  <div class="explain"><h4>Әр жолға түсіндірме</h4>
+    <table><thead><tr><th>№</th><th>Код</th><th>Түсіндірме</th></tr></thead><tbody><tr><td class="ln">1</td><td><code>a = {1, 2, 3, 4, 5}</code></td><td>A жиыны.</td></tr><tr><td class="ln">2</td><td><code>b = {4, 5, 6, 7, 8}</code></td><td>B жиыны. Ортақ элементтері: 4 және 5.</td></tr><tr><td class="ln">3</td><td><code>print('Бірігуі:', sorted(a | b))</code></td><td>| екі жиынның барлық элементін біріктіреді (a.union(b) сияқты). Қайталанбайды.</td></tr><tr><td class="ln">4</td><td><code>print('Қиылысуы:', sorted(a &amp; b))</code></td><td>&amp; тек екі жиында да бар элементтерді алады (a.intersection(b)).</td></tr><tr><td class="ln">5</td><td><code>print('Айырымы:', sorted(a - b))</code></td><td>- a-да бар, бірақ b-да жоқ элементтерді алады (a.difference(b)).</td></tr><tr><td class="ln">6</td><td><code>print('Симметриялық айырым:', sorted(a ^ b))</code></td><td>^ тек біреуінде ғана бар элементтерді алады (a.symmetric_difference(b)).</td></tr></tbody></table></div>
+  <div class="output"><h4>Күтілетін нәтиже</h4><pre>Бірігуі: [1, 2, 3, 4, 5, 6, 7, 8]
+Қиылысуы: [4, 5]
+Айырымы: [1, 2, 3]
+Симметриялық айырым: [1, 2, 3, 6, 7, 8]</pre></div>
+</figure>
+  <figure class="code-card" id="ex-setchange">
+  <figcaption><span class="code-title">add() және discard()</span>
+    <button type="button" class="btn copy" data-copy="ex-setchange-code">Көшіріп алу</button></figcaption>
+  <pre class="code" id="ex-setchange-code" tabindex="0"><code>numbers = {1, 2, 3, 4, 5, 6}
+numbers.discard(3)
+numbers.add(8)
+print(sorted(numbers))</code></pre>
+  <div class="explain"><h4>Әр жолға түсіндірме</h4>
+    <table><thead><tr><th>№</th><th>Код</th><th>Түсіндірме</th></tr></thead><tbody><tr><td class="ln">1</td><td><code>numbers = {1, 2, 3, 4, 5, 6}</code></td><td>Алты элементті жиын.</td></tr><tr><td class="ln">2</td><td><code>numbers.discard(3)</code></td><td>3 элементін жояды. Егер 3 жоқ болса да, қате шықпайды.</td></tr><tr><td class="ln">3</td><td><code>numbers.add(8)</code></td><td>Жиынға 8 элементін қосады.</td></tr><tr><td class="ln">4</td><td><code>print(sorted(numbers))</code></td><td>Нәтижені өсу ретімен шығарамыз.</td></tr></tbody></table></div>
+  <div class="output"><h4>Күтілетін нәтиже</h4><pre>[1, 2, 4, 5, 6, 8]</pre></div>
+</figure>
+  <h3><code>remove()</code> және <code>discard()</code></h3>
+  <p>Егер <code>remove()</code> жоқ элементті өшіруге тырысса — <code>KeyError</code> шығады. <code>discard()</code> болса, қате бермейді. Элемент міндетті түрде бар екеніне сенімді болсаңыз <code>remove()</code>, сенімсіз болсаңыз <code>discard()</code> қолданыңыз.</p>
+  <h3><code>frozenset</code></h3>
+  <p><code>frozenset</code> — өзгермейтін жиын. Ол <code>set</code> сияқты бірегей элементтерден тұрады және одан <code>|</code>, <code>&amp;</code>, <code>-</code> амалдарын орындауға болады, бірақ жасалғаннан кейін <code>add()</code>, <code>remove()</code>, <code>discard()</code> арқылы өзгертуге болмайды. Өзгермейтіндіктен оны басқа жиынның элементі немесе сөздіктің кілті ретінде қолдануға болады. Жасалуы: <code>frozenset([1, 2, 3])</code>.</p>
+  <p class="source">Дереккөз: оқу-әдістемелік кешен, №8 дәріс «Жиындар», PDF 67–74-б. Мысалдар Python 3 синтаксисімен жазылған.</p>
+  <div class="pager"><button type="button" class="btn btn-ghost" data-goto="s1">← Қайталау</button><button type="button" class="btn" data-goto="s3">Келесі: Сөздіктер →</button></div>
+</section><section class="section is-hidden" id="s3" aria-labelledby="h-s3">
+  <h2 id="h-s3"><span class="num">3</span>Сөздіктер <span class="time">10–15 минут</span></h2>
+  <p class="lead">Сөздік (<code>dict</code>) мәліметті <code>кілт: мән</code> жұптары түрінде сақтайды. Мәнге индекс емес, кілт арқылы қатынаймыз.</p>
+  <div class="grid2">
+    <div class="card"><h3>Негізгі ережелер</h3>
+      <ul class="tight">
+        <li>Жазылуы: <code>{кілт: мән}</code>, бос сөздік — <code>{}</code> немесе <code>dict()</code>.</li>
+        <li>Кілттер <strong>бірегей</strong>: бір кілт қайталанса, соңғы мән қалады.</li>
+        <li>Кілт өзгермейтін тип болуы керек (мәтін, сан, кортеж). Мән кез келген тип бола алады.</li>
+        <li>Қазіргі Python 3 сөздігі элементтерді <strong>енгізілген ретімен</strong> сақтайды (Python 3.7-ден бастап тілдің кепілдігі).</li>
+      </ul></div>
+    <div class="card"><h3>Қатынау және өзгерту</h3>
+      <table class="ref"><tbody>
+        <tr><td><code>d[key]</code></td><td>мәнді оқу; кілт жоқ болса — <code>KeyError</code></td></tr>
+        <tr><td><code>d.get(key, x)</code></td><td>кілт жоқ болса, қате емес, <code>x</code> (немесе <code>None</code>)</td></tr>
+        <tr><td><code>d[key] = v</code></td><td>кілт бар болса — мәнді өзгертеді, жоқ болса — қосады</td></tr>
+        <tr><td><code>key in d</code></td><td>кілттің барын тексереді</td></tr>
+      </tbody></table></div>
+  </div>
+  <div class="card"><h3>Әдістер</h3>
+    <table class="ref"><tbody>
+      <tr><td><code>d.keys()</code></td><td>кілттер</td><td><code>d.values()</code></td><td>мәндер</td></tr>
+      <tr><td><code>d.items()</code></td><td>(кілт, мән) жұптары</td><td><code>d.update(other)</code></td><td>басқа сөздіктің жазбаларын қосу/жаңарту</td></tr>
+      <tr><td><code>dict.fromkeys(keys, v)</code></td><td>кілттер тізімінен бірдей мәнді сөздік</td><td><code>dict(zip(keys, vals))</code></td><td>екі тізімнен сөздік</td></tr>
+    </tbody></table></div>
+  <figure class="code-card" id="ex-student">
+  <figcaption><span class="code-title">Сөздікпен жұмыс: қосу, өзгерту, оқу</span>
+    <button type="button" class="btn copy" data-copy="ex-student-code">Көшіріп алу</button></figcaption>
+  <pre class="code" id="ex-student-code" tabindex="0"><code>student = {'name': 'Asan', 'age': 20}
+student['city'] = 'Aktobe'
+student['age'] = 21
+print(student['name'])
+print(student.get('phone', 'мәлімет жоқ'))
+for key, value in student.items():
+    print(key, value)</code></pre>
+  <div class="explain"><h4>Әр жолға түсіндірме</h4>
+    <table><thead><tr><th>№</th><th>Код</th><th>Түсіндірме</th></tr></thead><tbody><tr><td class="ln">1</td><td><code>student = {'name': 'Asan', 'age': 20}</code></td><td>Сөздік: 'name' және 'age' — кілттер, 'Asan' және 20 — мәндер.</td></tr><tr><td class="ln">2</td><td><code>student['city'] = 'Aktobe'</code></td><td>Жаңа кілт болса, жаңа жазба қосылады.</td></tr><tr><td class="ln">3</td><td><code>student['age'] = 21</code></td><td>Кілт бұрыннан бар болса, оның мәні өзгереді.</td></tr><tr><td class="ln">4</td><td><code>print(student['name'])</code></td><td>Кілт бойынша мәнді оқимыз: Asan.</td></tr><tr><td class="ln">5</td><td><code>print(student.get('phone', 'мәлімет жоқ'))</code></td><td>'phone' кілті жоқ. get() қате бермей, екінші аргументті қайтарады.</td></tr><tr><td class="ln">6</td><td><code>for key, value in student.items():</code></td><td>items() кілт пен мәнді жұп-жұппен береді.</td></tr><tr><td class="ln">7</td><td><code>    print(key, value)</code></td><td>Әр жұпты жолма-жол шығарады (енгізілген ретпен).</td></tr></tbody></table></div>
+  <div class="output"><h4>Күтілетін нәтиже</h4><pre>Asan
+мәлімет жоқ
+name Asan
+age 21
+city Aktobe</pre></div>
+</figure>
+  <figure class="code-card" id="ex-zip">
+  <figcaption><span class="code-title">zip() арқылы сөздік құру</span>
+    <button type="button" class="btn copy" data-copy="ex-zip-code">Көшіріп алу</button></figcaption>
+  <pre class="code" id="ex-zip-code" tabindex="0"><code>fields = ['name', 'age', 'job']
+values = ['Dina', 22, 'developer']
+record = dict(zip(fields, values))
+print(record['job'])</code></pre>
+  <div class="explain"><h4>Әр жолға түсіндірме</h4>
+    <table><thead><tr><th>№</th><th>Код</th><th>Түсіндірме</th></tr></thead><tbody><tr><td class="ln">1</td><td><code>fields = ['name', 'age', 'job']</code></td><td>Кілттер тізімі.</td></tr><tr><td class="ln">2</td><td><code>values = ['Dina', 22, 'developer']</code></td><td>Мәндер тізімі (реті кілттермен сәйкес).</td></tr><tr><td class="ln">3</td><td><code>record = dict(zip(fields, values))</code></td><td>zip() екі тізімді жұптастырады, dict() одан сөздік жасайды.</td></tr><tr><td class="ln">4</td><td><code>print(record['job'])</code></td><td>'job' кілтінің мәнін шығарады.</td></tr></tbody></table></div>
+  <div class="output"><h4>Күтілетін нәтиже</h4><pre>developer</pre></div>
+</figure>
+  <figure class="code-card" id="ex-dictmethods">
+  <figcaption><span class="code-title">update(), keys(), values(), fromkeys(), сөздіктер тізімі</span>
+    <button type="button" class="btn copy" data-copy="ex-dictmethods-code">Көшіріп алу</button></figcaption>
+  <pre class="code" id="ex-dictmethods-code" tabindex="0"><code>student = {'name': 'Asan', 'age': 20}
+student.update({'age': 21, 'city': 'Aktobe'})
+print(list(student.keys()))
+print(list(student.values()))
+print(dict.fromkeys(['a', 'b'], 0))
+students = [{'name': 'Asan', 'age': 20}, {'name': 'Dina', 'age': 22}]
+for item in students:
+    print(item['name'], item['age'])</code></pre>
+  <div class="explain"><h4>Әр жолға түсіндірме</h4>
+    <table><thead><tr><th>№</th><th>Код</th><th>Түсіндірме</th></tr></thead><tbody><tr><td class="ln">1</td><td><code>student = {'name': 'Asan', 'age': 20}</code></td><td>Бастапқы сөздік.</td></tr><tr><td class="ln">2</td><td><code>student.update({'age': 21, 'city': 'Aktobe'})</code></td><td>update() бар кілттің мәнін өзгертеді (age), жоқ кілтті қосады (city).</td></tr><tr><td class="ln">3</td><td><code>print(list(student.keys()))</code></td><td>Барлық кілттер тізімі.</td></tr><tr><td class="ln">4</td><td><code>print(list(student.values()))</code></td><td>Барлық мәндер тізімі.</td></tr><tr><td class="ln">5</td><td><code>print(dict.fromkeys(['a', 'b'], 0))</code></td><td>Берілген кілттерге бірдей бастапқы мән (0) беріп, сөздік жасайды.</td></tr><tr><td class="ln">6</td><td><code>students = [{'name': 'Asan', 'age': 20}, {'name': 'Dina', 'age': 22}]</code></td><td>Сөздіктер тізімі: әр студент — бір сөздік.</td></tr><tr><td class="ln">7</td><td><code>for item in students:</code></td><td>Тізімнің әр сөздігін алып өтеміз.</td></tr><tr><td class="ln">8</td><td><code>    print(item['name'], item['age'])</code></td><td>Әр студенттің атын және жасын шығарамыз.</td></tr></tbody></table></div>
+  <div class="output"><h4>Күтілетін нәтиже</h4><pre>['name', 'age', 'city']
+['Asan', 21, 'Aktobe']
+{'a': 0, 'b': 0}
+Asan 20
+Dina 22</pre></div>
+</figure>
+  <div class="callout"><strong>Сөздіктер тізімі</strong> — кестеге ұқсас деректерді сақтаудың ыңғайлы жолы: әр жол бір сөздік, барлығы бір <code>list</code> ішінде. Зертханалық жұмыстарда дәл осындай деректер қолданылады.</div>
+  <p class="source">Дереккөз: оқу-әдістемелік кешен, №9 дәріс «Сөздіктер түсінігі және құру принциптері», PDF 74–80-б. Мысалдар Python 3 синтаксисімен жазылған.</p>
+  <div class="pager"><button type="button" class="btn btn-ghost" data-goto="s2">← Жиындар</button><button type="button" class="btn" data-goto="s4">Келесі: Практикалық тапсырмалар →</button></div>
+</section><section class="section is-hidden" id="s4" aria-labelledby="h-s4">
+  <h2 id="h-s4"><span class="num">4</span>Практикалық тапсырмалар <span class="time">15–50 минут</span></h2>
+  <p class="lead">Барлық студент бірдей 8 шағын тапсырманы орындайды (4 жиын, 4 сөздік), әрқайсысына шамамен 4 минут. Алдымен өзіңіз шешіп көріңіз, қиындық болса ғана кеңесті ашыңыз. Шешімді өз компьютеріңіздегі Python ортасында (IDLE / VS Code) орындап тексеріңіз.</p>
+  <p class="small">Бұл тапсырмалар — дәріс мысалдарына сүйенген жаттығулар. Олар зертханалық жұмыс жинағындағы нөмірлі есептермен байланысты емес.</p>
+  <article class="task" id="p1">
+  <h3>1-тапсырма. Бірегей сандар</h3>
+  <p>Тізімдегі бірегей сандарды өсу ретімен шығарыңыз.</p>
+  <div class="in-data"><span class="tag tag-data">Кіріс деректері</span>
+    <pre class="code" id="p1-data" tabindex="0"><code>numbers = [4, 6, 4, 8, 6, 9]</code></pre>
+    <button type="button" class="btn copy" data-copy="p1-data">Көшіріп алу</button></div>
+  <div class="task-actions">
+    <button type="button" class="btn btn-ghost" data-toggle="p1-hint" data-open="Кеңесті ашу" data-close="Кеңесті жасыру" aria-expanded="false" aria-controls="p1-hint">Кеңесті ашу</button>
+<div class="reveal hint" id="p1-hint" hidden><p>Алдымен тізімді set() арқылы жиынға айналдырыңыз — қайталанғандар жойылады. Содан кейін sorted() қолданып, өсу ретімен шығарыңыз.</p></div>
+  </div>
+</article>
+<article class="task" id="p2">
+  <h3>2-тапсырма. Қиылысу және айырым</h3>
+  <p>A және B жиындары берілген. Олардың қиылысуын және A − B айырымын табыңыз (екеуін де sorted() арқылы шығарыңыз).</p>
+  <div class="in-data"><span class="tag tag-data">Кіріс деректері</span>
+    <pre class="code" id="p2-data" tabindex="0"><code>A = {2, 4, 6, 8}
+B = {4, 7, 8}</code></pre>
+    <button type="button" class="btn copy" data-copy="p2-data">Көшіріп алу</button></div>
+  <div class="task-actions">
+    <button type="button" class="btn btn-ghost" data-toggle="p2-hint" data-open="Кеңесті ашу" data-close="Кеңесті жасыру" aria-expanded="false" aria-controls="p2-hint">Кеңесті ашу</button>
+<div class="reveal hint" id="p2-hint" hidden><p>Қиылысу үшін &amp; (немесе intersection()), айырым үшін - (немесе difference()) қолданыңыз. Нәтижені sorted() ішіне салыңыз.</p></div>
+  </div>
+</article>
+<article class="task" id="p3">
+  <h3>3-тапсырма. Элемент қосу және өшіру</h3>
+  <p>s жиынына 9 санын қосыңыз, 3 санын өшіріңіз, содан кейін жиында жоқ 100 санын discard() арқылы өшіріп көріңіз (қате шықпауы керек). Жиынды өсу ретімен және элемент санын шығарыңыз.</p>
+  <div class="in-data"><span class="tag tag-data">Кіріс деректері</span>
+    <pre class="code" id="p3-data" tabindex="0"><code>s = {1, 3, 5, 7}</code></pre>
+    <button type="button" class="btn copy" data-copy="p3-data">Көшіріп алу</button></div>
+  <div class="task-actions">
+    <button type="button" class="btn btn-ghost" data-toggle="p3-hint" data-open="Кеңесті ашу" data-close="Кеңесті жасыру" aria-expanded="false" aria-controls="p3-hint">Кеңесті ашу</button>
+<div class="reveal hint" id="p3-hint" hidden><p>add() — қосады, discard() — өшіреді (жоқ болса да қате бермейді). Элемент санын len() береді.</p></div>
+  </div>
+</article>
+<article class="task" id="p4">
+  <h3>4-тапсырма. Екі топтың аттары</h3>
+  <p>Екі топтың студент аттары берілген. Екі топта да бар аттарды және тек біреуінде ғана бар аттарды өсу ретімен шығарыңыз.</p>
+  <div class="in-data"><span class="tag tag-data">Кіріс деректері</span>
+    <pre class="code" id="p4-data" tabindex="0"><code>group_a = {'Aru', 'Dina', 'Eldos', 'Asan'}
+group_b = {'Dina', 'Asan', 'Nurlan'}</code></pre>
+    <button type="button" class="btn copy" data-copy="p4-data">Көшіріп алу</button></div>
+  <div class="task-actions">
+    <button type="button" class="btn btn-ghost" data-toggle="p4-hint" data-open="Кеңесті ашу" data-close="Кеңесті жасыру" aria-expanded="false" aria-controls="p4-hint">Кеңесті ашу</button>
+<div class="reveal hint" id="p4-hint" hidden><p>«Екеуінде де бар» — қиылысу (&amp;), «тек біреуінде» — симметриялық айырым (^). Екеуін де sorted() ішіне салыңыз.</p></div>
+  </div>
+</article>
+<article class="task" id="p5">
+  <h3>5-тапсырма. Сөздікті өзгерту</h3>
+  <p>score мәнін 85-ке жаңартыңыз, dept кілтін қосыңыз (мәнін өзіңіз таңдаңыз, мысалы 'IT'), содан кейін name мен score мәндерін шығарыңыз.</p>
+  <div class="in-data"><span class="tag tag-data">Кіріс деректері</span>
+    <pre class="code" id="p5-data" tabindex="0"><code>student = {'name': 'Dina', 'score': 75}</code></pre>
+    <button type="button" class="btn copy" data-copy="p5-data">Көшіріп алу</button></div>
+  <div class="task-actions">
+    <button type="button" class="btn btn-ghost" data-toggle="p5-hint" data-open="Кеңесті ашу" data-close="Кеңесті жасыру" aria-expanded="false" aria-controls="p5-hint">Кеңесті ашу</button>
+<div class="reveal hint" id="p5-hint" hidden><p>Бар кілттің мәнін student['score'] = ... арқылы өзгертесіз; жаңа кілт те дәл осылай қосылады. Мәндерді student['name'] түрінде оқыңыз.</p></div>
+  </div>
+</article>
+<article class="task" id="p6">
+  <h3>6-тапсырма. get() және items()</h3>
+  <p>prices сөздігінен «нан» бағасын [] арқылы шығарыңыз; «шай» кілті жоқ, оның бағасын get() арқылы қате шығармай 0 деп шығарыңыз; содан кейін барлық тауар мен бағасын жолма-жол шығарыңыз.</p>
+  <div class="in-data"><span class="tag tag-data">Кіріс деректері</span>
+    <pre class="code" id="p6-data" tabindex="0"><code>prices = {'алма': 450, 'нан': 120, 'сүт': 300}</code></pre>
+    <button type="button" class="btn copy" data-copy="p6-data">Көшіріп алу</button></div>
+  <div class="task-actions">
+    <button type="button" class="btn btn-ghost" data-toggle="p6-hint" data-open="Кеңесті ашу" data-close="Кеңесті жасыру" aria-expanded="false" aria-controls="p6-hint">Кеңесті ашу</button>
+<div class="reveal hint" id="p6-hint" hidden><p>Кілт бар болса prices['нан'] жұмыс істейді. Жоқ кілт үшін prices.get('шай', 0). Жұптарды for key, value in prices.items(): арқылы алыңыз.</p></div>
+  </div>
+</article>
+<article class="task" id="p7">
+  <h3>7-тапсырма. zip() және update()</h3>
+  <p>fields және values тізімдерінен zip() арқылы сөздік жасаңыз. Содан кейін update() арқылы age мәнін 22-ге өзгертіп, group кілтін ('IS-31') қосыңыз және сөздікті шығарыңыз.</p>
+  <div class="in-data"><span class="tag tag-data">Кіріс деректері</span>
+    <pre class="code" id="p7-data" tabindex="0"><code>fields = ['name', 'age']
+values = ['Aru', 21]</code></pre>
+    <button type="button" class="btn copy" data-copy="p7-data">Көшіріп алу</button></div>
+  <div class="task-actions">
+    <button type="button" class="btn btn-ghost" data-toggle="p7-hint" data-open="Кеңесті ашу" data-close="Кеңесті жасыру" aria-expanded="false" aria-controls="p7-hint">Кеңесті ашу</button>
+<div class="reveal hint" id="p7-hint" hidden><p>dict(zip(fields, values)) сөздік жасайды. update() ішіне жаңа жазбалары бар сөздік беріңіз: бар кілттің мәні өзгереді, жоқ кілт қосылады.</p></div>
+  </div>
+</article>
+<article class="task" id="p8">
+  <h3>8-тапсырма. Сөздіктер тізімі</h3>
+  <p>Студенттер тізімінен ұпайы 80-ден кем емес студенттердің аты мен ұпайын шығарыңыз, содан кейін олардың санын шығарыңыз.</p>
+  <div class="in-data"><span class="tag tag-data">Кіріс деректері</span>
+    <pre class="code" id="p8-data" tabindex="0"><code>students = [
+    {'name': 'Asan', 'score': 72},
+    {'name': 'Dina', 'score': 90},
+    {'name': 'Aru', 'score': 85},
+    {'name': 'Eldos', 'score': 60}
+]</code></pre>
+    <button type="button" class="btn copy" data-copy="p8-data">Көшіріп алу</button></div>
+  <div class="task-actions">
+    <button type="button" class="btn btn-ghost" data-toggle="p8-hint" data-open="Кеңесті ашу" data-close="Кеңесті жасыру" aria-expanded="false" aria-controls="p8-hint">Кеңесті ашу</button>
+<div class="reveal hint" id="p8-hint" hidden><p>for item in students: арқылы әр сөздікті алып, item['score'] &gt;= 80 шартын тексеріңіз. Санауыш ретінде count = 0 қолданыңыз.</p></div>
+  </div>
+</article>
+  <article class="task" id="p-final">
+    <h3>Қорытынды сұрақтар</h3>
+    <p class="small">Жауабын дәптерге жазыңыз, оқытушы сабақ соңында тексереді.</p>
+    <p><strong>1.</strong> Қайталануды жою үшін қандай тип керек?</p>
+    <p><strong>2.</strong> Ат, жас, мамандық сияқты сипаттарды кілтпен сақтау үшін қандай тип тиімді?</p>
+  </article>
+  <div class="pager"><button type="button" class="btn btn-ghost" data-goto="s3">← Сөздіктер</button><button type="button" class="btn" data-mode-goto="lab">Зертханалық сабаққа өту →</button></div>
+</section></div>
+  </div>
+  <div class="mode" id="mode-lab" role="tabpanel" aria-labelledby="tab-lab" hidden>
+    <nav class="side noprint" aria-label="Зертханалық сабақ бөлімдері"><button type="button" class="navbtn" data-section="s5"><span class="n">5</span><span class="t">Менің нұсқам</span><span class="m">0–42 мин</span></button><button type="button" class="navbtn" data-section="s6"><span class="n">6</span><span class="t">Қорытынды және тапсыру</span><span class="m">42–50 мин</span></button></nav>
+    <div class="main"><section class="section" id="s5" aria-labelledby="h-s5">
+  <h2 id="h-s5"><span class="num">5</span>Менің нұсқам <span class="time">зертханалық · <span data-cfg="labMinutes">50</span> минут</span></h2>
+  <ol class="stages" aria-label="Сабақ кезеңдері"><li><span class="m">0–5 мин</span><span>Нұсқа беру</span></li><li><span class="m">5–15 мин</span><span>1-есеп: жиын</span></li><li><span class="m">15–28 мин</span><span>2-есеп: сөздік</span></li><li><span class="m">28–42 мин</span><span>3-есеп: жиын + сөздік</span></li><li><span class="m">42–47 мин</span><span>Тексеру</span></li><li><span class="m">47–50 мин</span><span>Тапсыру</span></li></ol>
+  <fieldset class="vsel"><legend>Нұсқаңызды таңдаңыз</legend>
+    <div class="vbtns"><label class="vbtn"><input type="radio" name="variant" value="1"><span>1</span></label><label class="vbtn"><input type="radio" name="variant" value="2"><span>2</span></label><label class="vbtn"><input type="radio" name="variant" value="3"><span>3</span></label><label class="vbtn"><input type="radio" name="variant" value="4"><span>4</span></label><label class="vbtn"><input type="radio" name="variant" value="5"><span>5</span></label><label class="vbtn"><input type="radio" name="variant" value="6"><span>6</span></label><label class="vbtn"><input type="radio" name="variant" value="7"><span>7</span></label><label class="vbtn"><input type="radio" name="variant" value="8"><span>8</span></label></div>
+    <p class="small">Нұсқа нөмірін оқытушы береді; сайт нұсқаны кездейсоқ таратпайды. Әдістемедегі №1 тапсырмалар бұл сабақта қолданылмайды. Әр нұсқада үш есеп бар: жиын, сөздік және жиын + сөздік.</p></fieldset>
+  <div id="no-variant" class="callout">Алдымен нұсқа нөмірін таңдаңыз.</div>
+  <div id="variants"><div class="variant" data-variant="1" hidden><article class="lab-task">
+  <h3>1-есеп. Жиын <span class="src">/ Зертханалық №10 / әдістемедегі №2 тапсырма</span></h3>
+  <div class="orig"><span class="tag tag-orig">Түпнұсқа тапсырма</span><p>A={2;4;6;8;10} және B={3;6;9;12} жиындары берілген. Екі жиынның қиылысуын және бірігуін табыңыз.</p>
+    <p class="small">Дереккөз: зертханалық жұмыс №10, PDF 178-б.</p></div>
+  <figure class="code-card teacher-data" id="v1-set-data">
+  <figcaption><span class="tag tag-data">Оқытушы ұсынған деректер</span><span class="code-title">Оқытушы ұсынған бастапқы деректер</span>
+    <button type="button" class="btn copy" data-copy="v1-set-data-code">Көшіріп алу</button></figcaption>
+  <pre class="code" id="v1-set-data-code" tabindex="0"><code>A = {2, 4, 6, 8, 10}
+B = {3, 6, 9, 12}</code></pre>
+</figure>
+  
+  <div class="steps"><h4>Қысқа нұсқаулық</h4><ol><li>Деректерді көшіріп алып, тиісті <code>.py</code> файлына қойыңыз.</li><li>Шешімді өзіңіз жазыңыз және <b>Python ортасында орындаңыз</b> (IDLE / VS Code).</li><li><b>Кемінде екі тексеру мысалын көрсетіңіз</b> (деректерді өзгертіп орындаңыз).</li><li>Файлдың басына 1–2 жолдық қысқа түсіндірмені комментарий етіп жазыңыз.</li></ol><p class="small">Файл атауы: <code>set_variant_1.py</code></p></div>
+</article><article class="lab-task">
+  <h3>2-есеп. Сөздік <span class="src">/ Зертханалық №11 / әдістемедегі №10 тапсырма</span></h3>
+  <div class="orig"><span class="tag tag-orig">Түпнұсқа тапсырма</span><p>Дәріханадағы дәрілер туралы келесі мәліметтер белгілі болсын: дәрілік препараттың аты, бағасы, саны, сақтау мерзімі. Дәріханадғы барлық дәрілердің қанша тұратынын және сақтау мерзімі 3 айдан артық препараттарды анықтау программасын құрыңыз.</p>
+    <p class="small">Дереккөз: зертханалық жұмыс №11, PDF 180–181-б.</p></div>
+  <figure class="code-card teacher-data" id="v1-dict-data">
+  <figcaption><span class="tag tag-data">Оқытушы ұсынған деректер</span><span class="code-title">Оқытушы ұсынған бастапқы деректер</span>
+    <button type="button" class="btn copy" data-copy="v1-dict-data-code">Көшіріп алу</button></figcaption>
+  <pre class="code" id="v1-dict-data-code" tabindex="0"><code>drugs = [
+    {"атауы": "Парацетамол", "бағасы": 350, "саны": 5, "мерзімі": 8},
+    {"атауы": "Витамин C", "бағасы": 900, "саны": 2, "мерзімі": 2},
+    {"атауы": "Сироп", "бағасы": 1200, "саны": 3, "мерзімі": 6},
+    {"атауы": "Спрей", "бағасы": 1500, "саны": 1, "мерзімі": 3}
+]</code></pre>
+</figure>
+  <div class="clar"><span class="tag tag-clar">Оқытушының нақтылауы</span><p>Сөздік есебінде барлық дәрілердің жалпы құны: баға × сан қосындысы. Мерзімі 3 айдан артықтарды жеке шығарыңыз.</p></div>
+  <div class="steps"><h4>Қысқа нұсқаулық</h4><ol><li>Деректерді көшіріп алып, тиісті <code>.py</code> файлына қойыңыз.</li><li>Шешімді өзіңіз жазыңыз және <b>Python ортасында орындаңыз</b> (IDLE / VS Code).</li><li><b>Кемінде екі тексеру мысалын көрсетіңіз</b> (деректерді өзгертіп орындаңыз).</li><li>Файлдың басына 1–2 жолдық қысқа түсіндірмені комментарий етіп жазыңыз.</li></ol><p class="small">Файл атауы: <code>dict_variant_1.py</code></p></div>
+</article><article class="lab-task">
+  <h3>3-есеп. Жиын + сөздік <span class="src">/ оқытушы ұсынған қосымша есеп</span></h3>
+  <div class="extra"><span class="tag tag-extra">Қосымша есеп</span><p>Студенттердің қалалары сөздіктер тізімі түрінде берілген. 1) Қалалардан қайталанбайтын жиын құрыңыз. 2) Оның visited жиынымен қиылысуын табыңыз. 3) Нәтижені sorted() арқылы және элемент санын шығарыңыз.</p>
+    <p class="small">Бұл есеп әдістемедегі нөмірлі есеп емес, оқытушының қосымша тапсырмасы.</p></div>
+  <figure class="code-card teacher-data" id="v1-mixed-data">
+  <figcaption><span class="tag tag-data">Оқытушы ұсынған деректер</span><span class="code-title">Оқытушы ұсынған бастапқы деректер</span>
+    <button type="button" class="btn copy" data-copy="v1-mixed-data-code">Көшіріп алу</button></figcaption>
+  <pre class="code" id="v1-mixed-data-code" tabindex="0"><code>students = [
+    {"аты": "Аян", "қала": "Ақтөбе"},
+    {"аты": "Дина", "қала": "Орал"},
+    {"аты": "Ерлан", "қала": "Ақтөбе"},
+    {"аты": "Аружан", "қала": "Атырау"},
+    {"аты": "Саят", "қала": "Орал"}
+]
+visited = {"Ақтөбе", "Астана", "Атырау"}</code></pre>
+</figure>
+  <div class="steps"><h4>Қысқа нұсқаулық</h4><ol><li>Деректерді көшіріп алып, тиісті <code>.py</code> файлына қойыңыз.</li><li>Шешімді өзіңіз жазыңыз және <b>Python ортасында орындаңыз</b> (IDLE / VS Code).</li><li><b>Кемінде екі тексеру мысалын көрсетіңіз</b> (деректерді өзгертіп орындаңыз).</li><li>Файлдың басына 1–2 жолдық қысқа түсіндірмені комментарий етіп жазыңыз.</li></ol><p class="small">Файл атауы: <code>mixed_variant_1.py</code></p></div>
+</article></div><div class="variant" data-variant="2" hidden><article class="lab-task">
+  <h3>1-есеп. Жиын <span class="src">/ Зертханалық №10 / әдістемедегі №7 тапсырма</span></h3>
+  <div class="orig"><span class="tag tag-orig">Түпнұсқа тапсырма</span><p>A жиыны берілген. Жиынның 5ке еселі сандарын жойыңыз.</p>
+    <p class="small">Дереккөз: зертханалық жұмыс №10, PDF 178-б.</p></div>
+  <figure class="code-card teacher-data" id="v2-set-data">
+  <figcaption><span class="tag tag-data">Оқытушы ұсынған деректер</span><span class="code-title">Оқытушы ұсынған бастапқы деректер</span>
+    <button type="button" class="btn copy" data-copy="v2-set-data-code">Көшіріп алу</button></figcaption>
+  <pre class="code" id="v2-set-data-code" tabindex="0"><code>A = {5, 7, 10, 11, 15, 20, 24}</code></pre>
+</figure>
+  
+  <div class="steps"><h4>Қысқа нұсқаулық</h4><ol><li>Деректерді көшіріп алып, тиісті <code>.py</code> файлына қойыңыз.</li><li>Шешімді өзіңіз жазыңыз және <b>Python ортасында орындаңыз</b> (IDLE / VS Code).</li><li><b>Кемінде екі тексеру мысалын көрсетіңіз</b> (деректерді өзгертіп орындаңыз).</li><li>Файлдың басына 1–2 жолдық қысқа түсіндірмені комментарий етіп жазыңыз.</li></ol><p class="small">Файл атауы: <code>set_variant_2.py</code></p></div>
+</article><article class="lab-task">
+  <h3>2-есеп. Сөздік <span class="src">/ Зертханалық №11 / әдістемедегі №9 тапсырма</span></h3>
+  <div class="orig"><span class="tag tag-orig">Түпнұсқа тапсырма</span><p>Тұрғындар санағының нәтижелері берілген болсын. 1990 ж. кейін туылған тұрғындардың фамилиясын, атын және жалпы санын анықтайтын программа құрыңыз.</p>
+    <p class="small">Дереккөз: зертханалық жұмыс №11, PDF 180–181-б.</p></div>
+  <figure class="code-card teacher-data" id="v2-dict-data">
+  <figcaption><span class="tag tag-data">Оқытушы ұсынған деректер</span><span class="code-title">Оқытушы ұсынған бастапқы деректер</span>
+    <button type="button" class="btn copy" data-copy="v2-dict-data-code">Көшіріп алу</button></figcaption>
+  <pre class="code" id="v2-dict-data-code" tabindex="0"><code>people = [
+    {"тегі": "Әлиев", "аты": "Данияр", "жылы": 1994},
+    {"тегі": "Ким", "аты": "Диана", "жылы": 1988},
+    {"тегі": "Қабылбек", "аты": "Ару", "жылы": 2003},
+    {"тегі": "Омар", "аты": "Елдос", "жылы": 1990}
+]</code></pre>
+</figure>
+  <div class="clar"><span class="tag tag-clar">Оқытушының нақтылауы</span><p>1990 жылдан кейін деген шарт: жылы &gt; 1990 (1990 жылдың өзі кірмейді).</p></div>
+  <div class="steps"><h4>Қысқа нұсқаулық</h4><ol><li>Деректерді көшіріп алып, тиісті <code>.py</code> файлына қойыңыз.</li><li>Шешімді өзіңіз жазыңыз және <b>Python ортасында орындаңыз</b> (IDLE / VS Code).</li><li><b>Кемінде екі тексеру мысалын көрсетіңіз</b> (деректерді өзгертіп орындаңыз).</li><li>Файлдың басына 1–2 жолдық қысқа түсіндірмені комментарий етіп жазыңыз.</li></ol><p class="small">Файл атауы: <code>dict_variant_2.py</code></p></div>
+</article><article class="lab-task">
+  <h3>3-есеп. Жиын + сөздік <span class="src">/ оқытушы ұсынған қосымша есеп</span></h3>
+  <div class="extra"><span class="tag tag-extra">Қосымша есеп</span><p>Кітапхана кітаптары сөздіктер тізімі түрінде берілген. 1) Жанрлардан қайталанбайтын жиын құрыңыз. 2) Тізімде бар, бірақ known жиынында жоқ жанрларды табыңыз (айырым). 3) Нәтижені sorted() арқылы және элемент санын шығарыңыз.</p>
+    <p class="small">Бұл есеп әдістемедегі нөмірлі есеп емес, оқытушының қосымша тапсырмасы.</p></div>
+  <figure class="code-card teacher-data" id="v2-mixed-data">
+  <figcaption><span class="tag tag-data">Оқытушы ұсынған деректер</span><span class="code-title">Оқытушы ұсынған бастапқы деректер</span>
+    <button type="button" class="btn copy" data-copy="v2-mixed-data-code">Көшіріп алу</button></figcaption>
+  <pre class="code" id="v2-mixed-data-code" tabindex="0"><code>books = [
+    {"атауы": "Абай жолы", "жанры": "роман"},
+    {"атауы": "Python", "жанры": "ғылыми"},
+    {"атауы": "Алгоритм", "жанры": "ғылыми"},
+    {"атауы": "Қобыланды", "жанры": "эпос"},
+    {"атауы": "Ертегілер", "жанры": "балалар"}
+]
+known = {"роман", "ғылыми", "детектив"}</code></pre>
+</figure>
+  <div class="steps"><h4>Қысқа нұсқаулық</h4><ol><li>Деректерді көшіріп алып, тиісті <code>.py</code> файлына қойыңыз.</li><li>Шешімді өзіңіз жазыңыз және <b>Python ортасында орындаңыз</b> (IDLE / VS Code).</li><li><b>Кемінде екі тексеру мысалын көрсетіңіз</b> (деректерді өзгертіп орындаңыз).</li><li>Файлдың басына 1–2 жолдық қысқа түсіндірмені комментарий етіп жазыңыз.</li></ol><p class="small">Файл атауы: <code>mixed_variant_2.py</code></p></div>
+</article></div><div class="variant" data-variant="3" hidden><article class="lab-task">
+  <h3>1-есеп. Жиын <span class="src">/ Зертханалық №10 / әдістемедегі №8 тапсырма</span></h3>
+  <div class="orig"><span class="tag tag-orig">Түпнұсқа тапсырма</span><p>A={2; 6;8;9} және B={3;6;9 } жиындары берілген. Екі жиынның бірігуін және айырымын табыңыз.</p>
+    <p class="small">Дереккөз: зертханалық жұмыс №10, PDF 178-б.</p></div>
+  <figure class="code-card teacher-data" id="v3-set-data">
+  <figcaption><span class="tag tag-data">Оқытушы ұсынған деректер</span><span class="code-title">Оқытушы ұсынған бастапқы деректер</span>
+    <button type="button" class="btn copy" data-copy="v3-set-data-code">Көшіріп алу</button></figcaption>
+  <pre class="code" id="v3-set-data-code" tabindex="0"><code>A = {2, 6, 8, 9}
+B = {3, 6, 9}</code></pre>
+</figure>
+  
+  <div class="steps"><h4>Қысқа нұсқаулық</h4><ol><li>Деректерді көшіріп алып, тиісті <code>.py</code> файлына қойыңыз.</li><li>Шешімді өзіңіз жазыңыз және <b>Python ортасында орындаңыз</b> (IDLE / VS Code).</li><li><b>Кемінде екі тексеру мысалын көрсетіңіз</b> (деректерді өзгертіп орындаңыз).</li><li>Файлдың басына 1–2 жолдық қысқа түсіндірмені комментарий етіп жазыңыз.</li></ol><p class="small">Файл атауы: <code>set_variant_3.py</code></p></div>
+</article><article class="lab-task">
+  <h3>2-есеп. Сөздік <span class="src">/ Зертханалық №11 / әдістемедегі №6 тапсырма</span></h3>
+  <div class="orig"><span class="tag tag-orig">Түпнұсқа тапсырма</span><p>Кітаптардың аты, авторы, шыққан жылы, бағасы және тиражы бойынша сұрыпталған кітаптар тізімін шығарыңыз.</p>
+    <p class="small">Дереккөз: зертханалық жұмыс №11, PDF 180–181-б.</p></div>
+  <figure class="code-card teacher-data" id="v3-dict-data">
+  <figcaption><span class="tag tag-data">Оқытушы ұсынған деректер</span><span class="code-title">Оқытушы ұсынған бастапқы деректер</span>
+    <button type="button" class="btn copy" data-copy="v3-dict-data-code">Көшіріп алу</button></figcaption>
+  <pre class="code" id="v3-dict-data-code" tabindex="0"><code>books = [
+    {"атауы": "Python негіздері", "авторы": "А. Сәрсен", "жылы": 2020, "бағасы": 3800, "тиражы": 700},
+    {"атауы": "Алгоритмдер", "авторы": "Н. Жан", "жылы": 2017, "бағасы": 4200, "тиражы": 350},
+    {"атауы": "Деректер", "авторы": "М. Аман", "жылы": 2023, "бағасы": 3000, "тиражы": 500},
+    {"атауы": "Программалау", "авторы": "Е. Қуат", "жылы": 2019, "бағасы": 5500, "тиражы": 450}
+]</code></pre>
+</figure>
+  <div class="clar"><span class="tag tag-clar">Оқытушының нақтылауы</span><p>Түпнұсқада сұрыптау критерийінің реті нақтыланбаған. Біздің тексеруде екі бөлек сұрыптау жасаңыз: шыққан жылы және бағасы бойынша өсу ретімен.</p></div>
+  <div class="steps"><h4>Қысқа нұсқаулық</h4><ol><li>Деректерді көшіріп алып, тиісті <code>.py</code> файлына қойыңыз.</li><li>Шешімді өзіңіз жазыңыз және <b>Python ортасында орындаңыз</b> (IDLE / VS Code).</li><li><b>Кемінде екі тексеру мысалын көрсетіңіз</b> (деректерді өзгертіп орындаңыз).</li><li>Файлдың басына 1–2 жолдық қысқа түсіндірмені комментарий етіп жазыңыз.</li></ol><p class="small">Файл атауы: <code>dict_variant_3.py</code></p></div>
+</article><article class="lab-task">
+  <h3>3-есеп. Жиын + сөздік <span class="src">/ оқытушы ұсынған қосымша есеп</span></h3>
+  <div class="extra"><span class="tag tag-extra">Қосымша есеп</span><p>Дүкеннің сатылымдары сөздіктер тізімі түрінде берілген. 1) Сатылған тауарлардан қайталанбайтын жиын құрыңыз. 2) Оның stock жиынымен симметриялық айырымын табыңыз. 3) Нәтижені sorted() арқылы және элемент санын шығарыңыз.</p>
+    <p class="small">Бұл есеп әдістемедегі нөмірлі есеп емес, оқытушының қосымша тапсырмасы.</p></div>
+  <figure class="code-card teacher-data" id="v3-mixed-data">
+  <figcaption><span class="tag tag-data">Оқытушы ұсынған деректер</span><span class="code-title">Оқытушы ұсынған бастапқы деректер</span>
+    <button type="button" class="btn copy" data-copy="v3-mixed-data-code">Көшіріп алу</button></figcaption>
+  <pre class="code" id="v3-mixed-data-code" tabindex="0"><code>sales = [
+    {"тауар": "нан", "саны": 3},
+    {"тауар": "сүт", "саны": 2},
+    {"тауар": "кәмпит", "саны": 5},
+    {"тауар": "нан", "саны": 1},
+    {"тауар": "шай", "саны": 2}
+]
+stock = {"нан", "сүт", "май", "шай"}</code></pre>
+</figure>
+  <div class="steps"><h4>Қысқа нұсқаулық</h4><ol><li>Деректерді көшіріп алып, тиісті <code>.py</code> файлына қойыңыз.</li><li>Шешімді өзіңіз жазыңыз және <b>Python ортасында орындаңыз</b> (IDLE / VS Code).</li><li><b>Кемінде екі тексеру мысалын көрсетіңіз</b> (деректерді өзгертіп орындаңыз).</li><li>Файлдың басына 1–2 жолдық қысқа түсіндірмені комментарий етіп жазыңыз.</li></ol><p class="small">Файл атауы: <code>mixed_variant_3.py</code></p></div>
+</article></div><div class="variant" data-variant="4" hidden><article class="lab-task">
+  <h3>1-есеп. Жиын <span class="src">/ Зертханалық №10 / әдістемедегі №10 тапсырма</span></h3>
+  <div class="orig"><span class="tag tag-orig">Түпнұсқа тапсырма</span><p>А жиынындағы ең кіші элементі В жиынына орналастыру;</p>
+    <p class="small">Дереккөз: зертханалық жұмыс №10, PDF 178-б.</p></div>
+  <figure class="code-card teacher-data" id="v4-set-data">
+  <figcaption><span class="tag tag-data">Оқытушы ұсынған деректер</span><span class="code-title">Оқытушы ұсынған бастапқы деректер</span>
+    <button type="button" class="btn copy" data-copy="v4-set-data-code">Көшіріп алу</button></figcaption>
+  <pre class="code" id="v4-set-data-code" tabindex="0"><code>A = {4, 7, 10, 12}
+B = {1, 9}</code></pre>
+</figure>
+  <div class="clar"><span class="tag tag-clar">Оқытушының нақтылауы</span><p>«В жиынына орналастыру» тіркесі осы сабақта B жиынына элемент қосу деп нақтыланды; A жиынынан жою талап етілмейді.</p></div>
+  <div class="steps"><h4>Қысқа нұсқаулық</h4><ol><li>Деректерді көшіріп алып, тиісті <code>.py</code> файлына қойыңыз.</li><li>Шешімді өзіңіз жазыңыз және <b>Python ортасында орындаңыз</b> (IDLE / VS Code).</li><li><b>Кемінде екі тексеру мысалын көрсетіңіз</b> (деректерді өзгертіп орындаңыз).</li><li>Файлдың басына 1–2 жолдық қысқа түсіндірмені комментарий етіп жазыңыз.</li></ol><p class="small">Файл атауы: <code>set_variant_4.py</code></p></div>
+</article><article class="lab-task">
+  <h3>2-есеп. Сөздік <span class="src">/ Зертханалық №11 / әдістемедегі №5 тапсырма</span></h3>
+  <div class="orig"><span class="tag tag-orig">Түпнұсқа тапсырма</span><p>«Телефондық анықтаманы» модельдейтін программа құру, әйел адамдардың телефон номірі мен мекен жайын шығару.</p>
+    <p class="small">Дереккөз: зертханалық жұмыс №11, PDF 180–181-б.</p></div>
+  <figure class="code-card teacher-data" id="v4-dict-data">
+  <figcaption><span class="tag tag-data">Оқытушы ұсынған деректер</span><span class="code-title">Оқытушы ұсынған бастапқы деректер</span>
+    <button type="button" class="btn copy" data-copy="v4-dict-data-code">Көшіріп алу</button></figcaption>
+  <pre class="code" id="v4-dict-data-code" tabindex="0"><code>contacts = [
+    {"аты": "Айгүл", "жынысы": "әйел", "телефон": "111-22-33", "мекенжай": "Ақтөбе, 1-үй"},
+    {"аты": "Нұрлан", "жынысы": "ер", "телефон": "222-33-44", "мекенжай": "Ақтөбе, 2-үй"},
+    {"аты": "Дина", "жынысы": "әйел", "телефон": "333-44-55", "мекенжай": "Ақтөбе, 3-үй"},
+    {"аты": "Аян", "жынысы": "ер", "телефон": "444-55-66", "мекенжай": "Ақтөбе, 4-үй"}
+]</code></pre>
+</figure>
+  
+  <div class="steps"><h4>Қысқа нұсқаулық</h4><ol><li>Деректерді көшіріп алып, тиісті <code>.py</code> файлына қойыңыз.</li><li>Шешімді өзіңіз жазыңыз және <b>Python ортасында орындаңыз</b> (IDLE / VS Code).</li><li><b>Кемінде екі тексеру мысалын көрсетіңіз</b> (деректерді өзгертіп орындаңыз).</li><li>Файлдың басына 1–2 жолдық қысқа түсіндірмені комментарий етіп жазыңыз.</li></ol><p class="small">Файл атауы: <code>dict_variant_4.py</code></p></div>
+</article><article class="lab-task">
+  <h3>3-есеп. Жиын + сөздік <span class="src">/ оқытушы ұсынған қосымша есеп</span></h3>
+  <div class="extra"><span class="tag tag-extra">Қосымша есеп</span><p>Кафедра оқытушыларының пәндері сөздіктер тізімі түрінде берілген. 1) Пәндерден қайталанбайтын жиын құрыңыз. 2) Оның other жиынымен бірігуін табыңыз. 3) Нәтижені sorted() арқылы және элемент санын шығарыңыз.</p>
+    <p class="small">Бұл есеп әдістемедегі нөмірлі есеп емес, оқытушының қосымша тапсырмасы.</p></div>
+  <figure class="code-card teacher-data" id="v4-mixed-data">
+  <figcaption><span class="tag tag-data">Оқытушы ұсынған деректер</span><span class="code-title">Оқытушы ұсынған бастапқы деректер</span>
+    <button type="button" class="btn copy" data-copy="v4-mixed-data-code">Көшіріп алу</button></figcaption>
+  <pre class="code" id="v4-mixed-data-code" tabindex="0"><code>teachers = [
+    {"оқытушы": "Асқар", "пән": "Python"},
+    {"оқытушы": "Мира", "пән": "Алгоритмдер"},
+    {"оқытушы": "Бақыт", "пән": "Python"},
+    {"оқытушы": "Серік", "пән": "Желілер"},
+    {"оқытушы": "Гүлнар", "пән": "SQL"}
+]
+other = {"Java", "SQL"}</code></pre>
+</figure>
+  <div class="steps"><h4>Қысқа нұсқаулық</h4><ol><li>Деректерді көшіріп алып, тиісті <code>.py</code> файлына қойыңыз.</li><li>Шешімді өзіңіз жазыңыз және <b>Python ортасында орындаңыз</b> (IDLE / VS Code).</li><li><b>Кемінде екі тексеру мысалын көрсетіңіз</b> (деректерді өзгертіп орындаңыз).</li><li>Файлдың басына 1–2 жолдық қысқа түсіндірмені комментарий етіп жазыңыз.</li></ol><p class="small">Файл атауы: <code>mixed_variant_4.py</code></p></div>
+</article></div><div class="variant" data-variant="5" hidden><article class="lab-task">
+  <h3>1-есеп. Жиын <span class="src">/ Зертханалық №10 / әдістемедегі №9 тапсырма</span></h3>
+  <div class="orig"><span class="tag tag-orig">Түпнұсқа тапсырма</span><p>А жиынынан К элементке еселенген барлық сандарды жою;</p>
+    <p class="small">Дереккөз: зертханалық жұмыс №10, PDF 178-б.</p></div>
+  <figure class="code-card teacher-data" id="v5-set-data">
+  <figcaption><span class="tag tag-data">Оқытушы ұсынған деректер</span><span class="code-title">Оқытушы ұсынған бастапқы деректер</span>
+    <button type="button" class="btn copy" data-copy="v5-set-data-code">Көшіріп алу</button></figcaption>
+  <pre class="code" id="v5-set-data-code" tabindex="0"><code>A = {3, 5, 6, 9, 11, 14}
+K = 3</code></pre>
+</figure>
+  <div class="clar"><span class="tag tag-clar">Оқытушының нақтылауы</span><p>K осы мысалда 3; негізгі талап: A ішінен K-ге қалдықсыз бөлінетіндерді жою.</p></div>
+  <div class="steps"><h4>Қысқа нұсқаулық</h4><ol><li>Деректерді көшіріп алып, тиісті <code>.py</code> файлына қойыңыз.</li><li>Шешімді өзіңіз жазыңыз және <b>Python ортасында орындаңыз</b> (IDLE / VS Code).</li><li><b>Кемінде екі тексеру мысалын көрсетіңіз</b> (деректерді өзгертіп орындаңыз).</li><li>Файлдың басына 1–2 жолдық қысқа түсіндірмені комментарий етіп жазыңыз.</li></ol><p class="small">Файл атауы: <code>set_variant_5.py</code></p></div>
+</article><article class="lab-task">
+  <h3>2-есеп. Сөздік <span class="src">/ Зертханалық №11 / әдістемедегі №7 тапсырма</span></h3>
+  <div class="orig"><span class="tag tag-orig">Түпнұсқа тапсырма</span><p>Теміржол кассасында төмендегідей мәлімет бар: поездің номірі, баратын жері, билеттің бар не жоғы. Бос орындар саны 100-ден асатын поездардың номірін, баратын жерін экранға шығарыңыз.</p>
+    <p class="small">Дереккөз: зертханалық жұмыс №11, PDF 180–181-б.</p></div>
+  <figure class="code-card teacher-data" id="v5-dict-data">
+  <figcaption><span class="tag tag-data">Оқытушы ұсынған деректер</span><span class="code-title">Оқытушы ұсынған бастапқы деректер</span>
+    <button type="button" class="btn copy" data-copy="v5-dict-data-code">Көшіріп алу</button></figcaption>
+  <pre class="code" id="v5-dict-data-code" tabindex="0"><code>trains = [
+    {"нөмірі": "011", "бағыт": "Алматы", "билет_бар": True, "бос_орын": 80},
+    {"нөмірі": "022", "бағыт": "Астана", "билет_бар": True, "бос_орын": 132},
+    {"нөмірі": "033", "бағыт": "Атырау", "билет_бар": True, "бос_орын": 101},
+    {"нөмірі": "044", "бағыт": "Орал", "билет_бар": False, "бос_орын": 0}
+]</code></pre>
+</figure>
+  <div class="clar"><span class="tag tag-clar">Оқытушының нақтылауы</span><p>Пойызда бос орын &gt; 100 шарты қолданылады.</p></div>
+  <div class="steps"><h4>Қысқа нұсқаулық</h4><ol><li>Деректерді көшіріп алып, тиісті <code>.py</code> файлына қойыңыз.</li><li>Шешімді өзіңіз жазыңыз және <b>Python ортасында орындаңыз</b> (IDLE / VS Code).</li><li><b>Кемінде екі тексеру мысалын көрсетіңіз</b> (деректерді өзгертіп орындаңыз).</li><li>Файлдың басына 1–2 жолдық қысқа түсіндірмені комментарий етіп жазыңыз.</li></ol><p class="small">Файл атауы: <code>dict_variant_5.py</code></p></div>
+</article><article class="lab-task">
+  <h3>3-есеп. Жиын + сөздік <span class="src">/ оқытушы ұсынған қосымша есеп</span></h3>
+  <div class="extra"><span class="tag tag-extra">Қосымша есеп</span><p>Оқушылардың спорт секциялары сөздіктер тізімі түрінде берілген. 1) Секциялардан қайталанбайтын жиын құрыңыз. 2) Оның open_sections жиынымен қиылысуын табыңыз. 3) Нәтижені sorted() арқылы және элемент санын шығарыңыз.</p>
+    <p class="small">Бұл есеп әдістемедегі нөмірлі есеп емес, оқытушының қосымша тапсырмасы.</p></div>
+  <figure class="code-card teacher-data" id="v5-mixed-data">
+  <figcaption><span class="tag tag-data">Оқытушы ұсынған деректер</span><span class="code-title">Оқытушы ұсынған бастапқы деректер</span>
+    <button type="button" class="btn copy" data-copy="v5-mixed-data-code">Көшіріп алу</button></figcaption>
+  <pre class="code" id="v5-mixed-data-code" tabindex="0"><code>pupils = [
+    {"аты": "Алмас", "секция": "футбол"},
+    {"аты": "Томирис", "секция": "теннис"},
+    {"аты": "Рауан", "секция": "шахмат"},
+    {"аты": "Дәулет", "секция": "футбол"},
+    {"аты": "Інжу", "секция": "би"}
+]
+open_sections = {"футбол", "шахмат", "жүзу"}</code></pre>
+</figure>
+  <div class="steps"><h4>Қысқа нұсқаулық</h4><ol><li>Деректерді көшіріп алып, тиісті <code>.py</code> файлына қойыңыз.</li><li>Шешімді өзіңіз жазыңыз және <b>Python ортасында орындаңыз</b> (IDLE / VS Code).</li><li><b>Кемінде екі тексеру мысалын көрсетіңіз</b> (деректерді өзгертіп орындаңыз).</li><li>Файлдың басына 1–2 жолдық қысқа түсіндірмені комментарий етіп жазыңыз.</li></ol><p class="small">Файл атауы: <code>mixed_variant_5.py</code></p></div>
+</article></div><div class="variant" data-variant="6" hidden><article class="lab-task">
+  <h3>1-есеп. Жиын <span class="src">/ Зертханалық №10 / әдістемедегі №12 тапсырма</span></h3>
+  <div class="orig"><span class="tag tag-orig">Түпнұсқа тапсырма</span><p>А жиынындағы ең үлкен элементі В жиынына орналастыру;</p>
+    <p class="small">Дереккөз: зертханалық жұмыс №10, PDF 178-б.</p></div>
+  <figure class="code-card teacher-data" id="v6-set-data">
+  <figcaption><span class="tag tag-data">Оқытушы ұсынған деректер</span><span class="code-title">Оқытушы ұсынған бастапқы деректер</span>
+    <button type="button" class="btn copy" data-copy="v6-set-data-code">Көшіріп алу</button></figcaption>
+  <pre class="code" id="v6-set-data-code" tabindex="0"><code>A = {3, 8, 11, 16}
+B = {1, 4}</code></pre>
+</figure>
+  <div class="clar"><span class="tag tag-clar">Оқытушының нақтылауы</span><p>«В жиынына орналастыру» осы сабақта B жиынына қосу деп нақтыланды; A өзгермейді.</p></div>
+  <div class="steps"><h4>Қысқа нұсқаулық</h4><ol><li>Деректерді көшіріп алып, тиісті <code>.py</code> файлына қойыңыз.</li><li>Шешімді өзіңіз жазыңыз және <b>Python ортасында орындаңыз</b> (IDLE / VS Code).</li><li><b>Кемінде екі тексеру мысалын көрсетіңіз</b> (деректерді өзгертіп орындаңыз).</li><li>Файлдың басына 1–2 жолдық қысқа түсіндірмені комментарий етіп жазыңыз.</li></ol><p class="small">Файл атауы: <code>set_variant_6.py</code></p></div>
+</article><article class="lab-task">
+  <h3>2-есеп. Сөздік <span class="src">/ Зертханалық №11 / әдістемедегі №4 тапсырма</span></h3>
+  <div class="orig"><span class="tag tag-orig">Түпнұсқа тапсырма</span><p>Мекеме қызметкерлері туралы мәліметтер сөздік түрінде анықталған. Ер адамдардың мамандығы мен жасын көрсетіп, экранға тізім шығарыңыз.</p>
+    <p class="small">Дереккөз: зертханалық жұмыс №11, PDF 180–181-б.</p></div>
+  <figure class="code-card teacher-data" id="v6-dict-data">
+  <figcaption><span class="tag tag-data">Оқытушы ұсынған деректер</span><span class="code-title">Оқытушы ұсынған бастапқы деректер</span>
+    <button type="button" class="btn copy" data-copy="v6-dict-data-code">Көшіріп алу</button></figcaption>
+  <pre class="code" id="v6-dict-data-code" tabindex="0"><code>employees = [
+    {"аты": "Ержан", "жынысы": "ер", "мамандығы": "программист", "жасы": 27},
+    {"аты": "Айгүл", "жынысы": "әйел", "мамандығы": "дизайнер", "жасы": 26},
+    {"аты": "Бекзат", "жынысы": "ер", "мамандығы": "инженер", "жасы": 31},
+    {"аты": "Дана", "жынысы": "әйел", "мамандығы": "талдаушы", "жасы": 24}
+]</code></pre>
+</figure>
+  
+  <div class="steps"><h4>Қысқа нұсқаулық</h4><ol><li>Деректерді көшіріп алып, тиісті <code>.py</code> файлына қойыңыз.</li><li>Шешімді өзіңіз жазыңыз және <b>Python ортасында орындаңыз</b> (IDLE / VS Code).</li><li><b>Кемінде екі тексеру мысалын көрсетіңіз</b> (деректерді өзгертіп орындаңыз).</li><li>Файлдың басына 1–2 жолдық қысқа түсіндірмені комментарий етіп жазыңыз.</li></ol><p class="small">Файл атауы: <code>dict_variant_6.py</code></p></div>
+</article><article class="lab-task">
+  <h3>3-есеп. Жиын + сөздік <span class="src">/ оқытушы ұсынған қосымша есеп</span></h3>
+  <div class="extra"><span class="tag tag-extra">Қосымша есеп</span><p>Қонақүй бөлмелері сөздіктер тізімі түрінде берілген. 1) Бөлмелер орналасқан қабаттардан қайталанбайтын жиын құрыңыз. 2) Одан жөндеудегі repair қабаттарын шығарып тастаңыз (айырым). 3) Нәтижені sorted() арқылы және элемент санын шығарыңыз.</p>
+    <p class="small">Бұл есеп әдістемедегі нөмірлі есеп емес, оқытушының қосымша тапсырмасы.</p></div>
+  <figure class="code-card teacher-data" id="v6-mixed-data">
+  <figcaption><span class="tag tag-data">Оқытушы ұсынған деректер</span><span class="code-title">Оқытушы ұсынған бастапқы деректер</span>
+    <button type="button" class="btn copy" data-copy="v6-mixed-data-code">Көшіріп алу</button></figcaption>
+  <pre class="code" id="v6-mixed-data-code" tabindex="0"><code>rooms = [
+    {"нөмірі": 101, "қабат": 1},
+    {"нөмірі": 102, "қабат": 1},
+    {"нөмірі": 201, "қабат": 2},
+    {"нөмірі": 301, "қабат": 3},
+    {"нөмірі": 401, "қабат": 4}
+]
+repair = {2, 4}</code></pre>
+</figure>
+  <div class="steps"><h4>Қысқа нұсқаулық</h4><ol><li>Деректерді көшіріп алып, тиісті <code>.py</code> файлына қойыңыз.</li><li>Шешімді өзіңіз жазыңыз және <b>Python ортасында орындаңыз</b> (IDLE / VS Code).</li><li><b>Кемінде екі тексеру мысалын көрсетіңіз</b> (деректерді өзгертіп орындаңыз).</li><li>Файлдың басына 1–2 жолдық қысқа түсіндірмені комментарий етіп жазыңыз.</li></ol><p class="small">Файл атауы: <code>mixed_variant_6.py</code></p></div>
+</article></div><div class="variant" data-variant="7" hidden><article class="lab-task">
+  <h3>1-есеп. Жиын <span class="src">/ Зертханалық №10 / әдістемедегі №11 тапсырма</span></h3>
+  <div class="orig"><span class="tag tag-orig">Түпнұсқа тапсырма</span><p>А және В аралықтағы бүтін сандардан жиын құру</p>
+    <p class="small">Дереккөз: зертханалық жұмыс №10, PDF 178-б.</p></div>
+  <figure class="code-card teacher-data" id="v7-set-data">
+  <figcaption><span class="tag tag-data">Оқытушы ұсынған деректер</span><span class="code-title">Оқытушы ұсынған бастапқы деректер</span>
+    <button type="button" class="btn copy" data-copy="v7-set-data-code">Көшіріп алу</button></figcaption>
+  <pre class="code" id="v7-set-data-code" tabindex="0"><code>A = 4
+B = 11</code></pre>
+</figure>
+  <div class="clar"><span class="tag tag-clar">Оқытушының нақтылауы</span><p>А және В аралығы осы тексеруде екі шеткі мәнді қоса қамтиды: [4, 11].</p></div>
+  <div class="steps"><h4>Қысқа нұсқаулық</h4><ol><li>Деректерді көшіріп алып, тиісті <code>.py</code> файлына қойыңыз.</li><li>Шешімді өзіңіз жазыңыз және <b>Python ортасында орындаңыз</b> (IDLE / VS Code).</li><li><b>Кемінде екі тексеру мысалын көрсетіңіз</b> (деректерді өзгертіп орындаңыз).</li><li>Файлдың басына 1–2 жолдық қысқа түсіндірмені комментарий етіп жазыңыз.</li></ol><p class="small">Файл атауы: <code>set_variant_7.py</code></p></div>
+</article><article class="lab-task">
+  <h3>2-есеп. Сөздік <span class="src">/ Зертханалық №11 / әдістемедегі №8 тапсырма</span></h3>
+  <div class="orig"><span class="tag tag-orig">Түпнұсқа тапсырма</span><p>Өзіңіз оқитын топтың тізімін алфавит бойынша реттеп туған жылын көрсетіп экранға шығарыңыз.</p>
+    <p class="small">Дереккөз: зертханалық жұмыс №11, PDF 180–181-б.</p></div>
+  <figure class="code-card teacher-data" id="v7-dict-data">
+  <figcaption><span class="tag tag-data">Оқытушы ұсынған деректер</span><span class="code-title">Оқытушы ұсынған бастапқы деректер</span>
+    <button type="button" class="btn copy" data-copy="v7-dict-data-code">Көшіріп алу</button></figcaption>
+  <pre class="code" id="v7-dict-data-code" tabindex="0"><code>students = [
+    {"аты": "Мақсат", "туған_жылы": 2005},
+    {"аты": "Бекзат", "туған_жылы": 2004},
+    {"аты": "Айсұлтан", "туған_жылы": 2005},
+    {"аты": "Данияр", "туған_жылы": 2006}
+]</code></pre>
+</figure>
+  <div class="clar"><span class="tag tag-clar">Оқытушының нақтылауы</span><p>Топ аты-жөндері шартты мысал; өз тобыңыздың тізімі болса, алмастыра аласыз.</p></div>
+  <div class="steps"><h4>Қысқа нұсқаулық</h4><ol><li>Деректерді көшіріп алып, тиісті <code>.py</code> файлына қойыңыз.</li><li>Шешімді өзіңіз жазыңыз және <b>Python ортасында орындаңыз</b> (IDLE / VS Code).</li><li><b>Кемінде екі тексеру мысалын көрсетіңіз</b> (деректерді өзгертіп орындаңыз).</li><li>Файлдың басына 1–2 жолдық қысқа түсіндірмені комментарий етіп жазыңыз.</li></ol><p class="small">Файл атауы: <code>dict_variant_7.py</code></p></div>
+</article><article class="lab-task">
+  <h3>3-есеп. Жиын + сөздік <span class="src">/ оқытушы ұсынған қосымша есеп</span></h3>
+  <div class="extra"><span class="tag tag-extra">Қосымша есеп</span><p>Фирма қызметкерлерінің мамандықтары сөздіктер тізімі түрінде берілген. 1) Мамандықтардан қайталанбайтын жиын құрыңыз. 2) Оның required жиынымен симметриялық айырымын табыңыз. 3) Нәтижені sorted() арқылы және элемент санын шығарыңыз.</p>
+    <p class="small">Бұл есеп әдістемедегі нөмірлі есеп емес, оқытушының қосымша тапсырмасы.</p></div>
+  <figure class="code-card teacher-data" id="v7-mixed-data">
+  <figcaption><span class="tag tag-data">Оқытушы ұсынған деректер</span><span class="code-title">Оқытушы ұсынған бастапқы деректер</span>
+    <button type="button" class="btn copy" data-copy="v7-mixed-data-code">Көшіріп алу</button></figcaption>
+  <pre class="code" id="v7-mixed-data-code" tabindex="0"><code>workers = [
+    {"аты": "Ержан", "мамандығы": "программист"},
+    {"аты": "Айгүл", "мамандығы": "дизайнер"},
+    {"аты": "Бекзат", "мамандығы": "программист"},
+    {"аты": "Дана", "мамандығы": "аналитик"},
+    {"аты": "Нұрлан", "мамандығы": "менеджер"}
+]
+required = {"программист", "дизайнер", "тестілеуші"}</code></pre>
+</figure>
+  <div class="steps"><h4>Қысқа нұсқаулық</h4><ol><li>Деректерді көшіріп алып, тиісті <code>.py</code> файлына қойыңыз.</li><li>Шешімді өзіңіз жазыңыз және <b>Python ортасында орындаңыз</b> (IDLE / VS Code).</li><li><b>Кемінде екі тексеру мысалын көрсетіңіз</b> (деректерді өзгертіп орындаңыз).</li><li>Файлдың басына 1–2 жолдық қысқа түсіндірмені комментарий етіп жазыңыз.</li></ol><p class="small">Файл атауы: <code>mixed_variant_7.py</code></p></div>
+</article></div><div class="variant" data-variant="8" hidden><article class="lab-task">
+  <h3>1-есеп. Жиын <span class="src">/ Зертханалық №10 / әдістемедегі №6 тапсырма</span></h3>
+  <div class="orig"><span class="tag tag-orig">Түпнұсқа тапсырма</span><p>A жиыны берілген. Жиынның 3 ке еселі сандарын экранға шығарыңыз.</p>
+    <p class="small">Дереккөз: зертханалық жұмыс №10, PDF 178-б.</p></div>
+  <figure class="code-card teacher-data" id="v8-set-data">
+  <figcaption><span class="tag tag-data">Оқытушы ұсынған деректер</span><span class="code-title">Оқытушы ұсынған бастапқы деректер</span>
+    <button type="button" class="btn copy" data-copy="v8-set-data-code">Көшіріп алу</button></figcaption>
+  <pre class="code" id="v8-set-data-code" tabindex="0"><code>A = {3, 4, 6, 8, 9, 12, 14}</code></pre>
+</figure>
+  <div class="clar"><span class="tag tag-clar">Оқытушының нақтылауы</span><p>Жиын элементтерін оқуға ыңғайлы шығару үшін sorted() қолданыңыз.</p></div>
+  <div class="steps"><h4>Қысқа нұсқаулық</h4><ol><li>Деректерді көшіріп алып, тиісті <code>.py</code> файлына қойыңыз.</li><li>Шешімді өзіңіз жазыңыз және <b>Python ортасында орындаңыз</b> (IDLE / VS Code).</li><li><b>Кемінде екі тексеру мысалын көрсетіңіз</b> (деректерді өзгертіп орындаңыз).</li><li>Файлдың басына 1–2 жолдық қысқа түсіндірмені комментарий етіп жазыңыз.</li></ol><p class="small">Файл атауы: <code>set_variant_8.py</code></p></div>
+</article><article class="lab-task">
+  <h3>2-есеп. Сөздік <span class="src">/ Зертханалық №11 / әдістемедегі №11 тапсырма</span></h3>
+  <div class="orig"><span class="tag tag-orig">Түпнұсқа тапсырма</span><p>Фирма қызметкерлері туралы мәлімет берілген. Қызметкерлердің фамилиясын және атын, сонымен қатар әйел адам болса көзінің түсін, ер адам болса темекі шегетін, шекпейтіндігін көрсететін тізімді экранға шығарыңыз.</p>
+    <p class="small">Дереккөз: зертханалық жұмыс №11, PDF 180–181-б.</p></div>
+  <figure class="code-card teacher-data" id="v8-dict-data">
+  <figcaption><span class="tag tag-data">Оқытушы ұсынған деректер</span><span class="code-title">Оқытушы ұсынған бастапқы деректер</span>
+    <button type="button" class="btn copy" data-copy="v8-dict-data-code">Көшіріп алу</button></figcaption>
+  <pre class="code" id="v8-dict-data-code" tabindex="0"><code>staff = [
+    {"тегі": "Қасымов", "аты": "Айдар", "жынысы": "ер", "темекі_шегеді": False},
+    {"тегі": "Омарова", "аты": "Дина", "жынысы": "әйел", "көз_түсі": "қоңыр"},
+    {"тегі": "Беков", "аты": "Самат", "жынысы": "ер", "темекі_шегеді": True},
+    {"тегі": "Әлиева", "аты": "Айжан", "жынысы": "әйел", "көз_түсі": "көк"}
+]</code></pre>
+</figure>
+  <div class="clar"><span class="tag tag-clar">Оқытушының нақтылауы</span><p>Сөздік есебінде жынысына қарай тиісті өрісті ғана шығарыңыз.</p></div>
+  <div class="steps"><h4>Қысқа нұсқаулық</h4><ol><li>Деректерді көшіріп алып, тиісті <code>.py</code> файлына қойыңыз.</li><li>Шешімді өзіңіз жазыңыз және <b>Python ортасында орындаңыз</b> (IDLE / VS Code).</li><li><b>Кемінде екі тексеру мысалын көрсетіңіз</b> (деректерді өзгертіп орындаңыз).</li><li>Файлдың басына 1–2 жолдық қысқа түсіндірмені комментарий етіп жазыңыз.</li></ol><p class="small">Файл атауы: <code>dict_variant_8.py</code></p></div>
+</article><article class="lab-task">
+  <h3>3-есеп. Жиын + сөздік <span class="src">/ оқытушы ұсынған қосымша есеп</span></h3>
+  <div class="extra"><span class="tag tag-extra">Қосымша есеп</span><p>Курсқа жазылғандар сөздіктер тізімі түрінде берілген. 1) Курстардан қайталанбайтын жиын құрыңыз. 2) Ұсынылатын offered жиынында бар, бірақ ешкім жазылмаған курстарды табыңыз (айырым). 3) Нәтижені sorted() арқылы және элемент санын шығарыңыз.</p>
+    <p class="small">Бұл есеп әдістемедегі нөмірлі есеп емес, оқытушының қосымша тапсырмасы.</p></div>
+  <figure class="code-card teacher-data" id="v8-mixed-data">
+  <figcaption><span class="tag tag-data">Оқытушы ұсынған деректер</span><span class="code-title">Оқытушы ұсынған бастапқы деректер</span>
+    <button type="button" class="btn copy" data-copy="v8-mixed-data-code">Көшіріп алу</button></figcaption>
+  <pre class="code" id="v8-mixed-data-code" tabindex="0"><code>enrollments = [
+    {"студент": "Аян", "курс": "Python"},
+    {"студент": "Дина", "курс": "SQL"},
+    {"студент": "Ерлан", "курс": "Python"},
+    {"студент": "Аружан", "курс": "Web"}
+]
+offered = {"Python", "Java", "Web", "C++"}</code></pre>
+</figure>
+  <div class="steps"><h4>Қысқа нұсқаулық</h4><ol><li>Деректерді көшіріп алып, тиісті <code>.py</code> файлына қойыңыз.</li><li>Шешімді өзіңіз жазыңыз және <b>Python ортасында орындаңыз</b> (IDLE / VS Code).</li><li><b>Кемінде екі тексеру мысалын көрсетіңіз</b> (деректерді өзгертіп орындаңыз).</li><li>Файлдың басына 1–2 жолдық қысқа түсіндірмені комментарий етіп жазыңыз.</li></ol><p class="small">Файл атауы: <code>mixed_variant_8.py</code></p></div>
+</article></div></div>
+  <div class="legend"><span class="tag tag-orig">Түпнұсқа тапсырма</span> әдістемедегі мәтін, өзгертілмеген &nbsp; <span class="tag tag-data">Оқытушы ұсынған деректер</span> мысал деректер &nbsp; <span class="tag tag-clar">Оқытушының нақтылауы</span> түсініксіз талаптарға түсініктеме &nbsp; <span class="tag tag-extra">Қосымша есеп</span> оқытушының өз тапсырмасы</div>
+  <p class="source">Дереккөз: оқу-әдістемелік кешен, №10 зертханалық жұмыс «Жиын», PDF 177–178-б.; №11 зертханалық жұмыс «Сөздік», PDF 178–181-б.</p>
+  <div class="pager"><button type="button" class="btn btn-ghost" data-mode-goto="practice">← Практикалық сабақ</button><button type="button" class="btn" data-goto="s6">Келесі: Қорытынды және тапсыру →</button></div>
+</section><section class="section is-hidden" id="s6" aria-labelledby="h-s6">
+  <h2 id="h-s6"><span class="num">6</span>Қорытынды және тапсыру <span class="time">42–50 минут</span></h2>
+  <p class="chosen">Таңдалған нұсқа: <strong data-variant-label>таңдалмаған</strong></p>
+  <div class="card"><h3>Тапсырар алдында тексеріңіз (42–47 минут)</h3>
+    <ul class="check">
+      <li><label><input type="checkbox"> Үш программа да Python ортасында қатесіз орындалады.</label></li>
+      <li><label><input type="checkbox"> Әр есепте кемінде екі тексеру мысалы көрсетілген.</label></li>
+      <li><label><input type="checkbox"> Жиынның нәтижесі <code>sorted()</code> арқылы тұрақты ретпен шығады (қажет болса).</label></li>
+      <li><label><input type="checkbox"> Әр файлдың басында қысқа түсіндірме комментарий бар.</label></li>
+      <li><label><input type="checkbox"> Оқытушының нақтылаулары ескерілген.</label></li>
+    </ul></div>
+  <div class="card"><h3>Жауапты тапсыру (47–50 минут)</h3>
+    <p>Мына үш файлды <span data-cfg="submitPlace">оқытушы көрсеткен орынға</span> тапсырыңыз:</p>
+    <ul class="files"><li><code data-fname="set">set_variant_N.py</code> — жиын есебі</li><li><code data-fname="dict">dict_variant_N.py</code> — сөздік есебі</li><li><code data-fname="mixed">mixed_variant_N.py</code> — 3-есеп (жиын + сөздік)</li></ul>
+    <p class="small">Бұл сайт файлдарды серверге жібермейді (сервер жоқ). Файлдарды өз компьютеріңізде сақтап, оқытушы көрсеткен тәсілмен тапсырыңыз.</p></div>
+  <div class="card"><h3>Бағалау критерийлері (100 балл)</h3>
+    <table class="ref"><thead><tr><th>Критерий</th><th>Балл</th></tr></thead><tbody>
+      <tr><td>1-есеп (жиын) дұрыстығы</td><td>30</td></tr>
+      <tr><td>2-есеп (сөздік) дұрыстығы</td><td>30</td></tr>
+      <tr><td>3-есеп (жиын + сөздік) дұрыстығы</td><td>20</td></tr>
+      <tr><td>Әр есепке екі тексеру жағдайы</td><td>10</td></tr>
+      <tr><td>Қысқа түсіндіру</td><td>10</td></tr>
+      <tr class="total"><td>Барлығы</td><td>100</td></tr>
+    </tbody></table>
+    <p class="small">Сайт баға шығармайды: Python кодын браузерде орындамайды. Соңғы бағаны оқытушы қояды.</p></div>
+  <p class="noprint"><button type="button" class="btn" data-print>Нұсқаны басып шығару</button></p>
+  <div class="pager"><button type="button" class="btn btn-ghost" data-goto="s5">← Менің нұсқам</button><span></span></div>
+</section></div>
+  </div>
+</main>
+<footer class="site-footer noprint"><p>Python кодын өз компьютеріңізде орнатылған IDLE / VS Code / Python ортасында орындаңыз. Бұл сайт кодты орындамайды, тек мысалдарды көрсетеді.</p>
+<p>Дереккөз: оқу-әдістемелік кешен (№8, №9 дәрістер; №10, №11 зертханалық жұмыстар).</p></footer>
+<noscript><p class="noscript">Бұл сайттың батырмалары JavaScript қажет етеді. Браузерде JavaScript-ті қосыңыз.</p></noscript>
+<script src="script.js"></script>
+</body>
+</html>
